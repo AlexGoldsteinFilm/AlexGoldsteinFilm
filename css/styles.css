@@ -1,0 +1,503 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eeaeac; /* Soft Blush Pink as the full background */
+    color: #333; /* Darker text for better readability */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ✅ Ensure Full-Height Layout */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ✅ Ensure Main Content Takes Up Full Space */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centers Instagram widget */
+    padding-bottom: 20px; /* Adds spacing before footer */
+}
+
+/* Footer Styling - Ensures it spans full width and stays at bottom */
+footer {
+    background-color: #142424;
+    color: #eeaeac;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Header Styling */
+header {
+    background-color: #491521; /* Dark Wine Red */
+    color: #eeaeac; /* Soft Blush Pink text */
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.instagram-link {
+    font-size: 1.5em; /* Smaller icon */
+    margin-right: 10px; /* Space between icon and title */
+    color: #eeaeac;
+    text-decoration: none;
+}
+
+.instagram-link:hover {
+    color: #e1306c;
+}
+
+h1 {
+    font-size: 2em; /* Consistent title size */
+    margin: 0;
+}
+
+/* Navigation Styling */
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Ensures proper vertical alignment */
+    background-color: #273a38; /* Dark Green */
+    padding: 10px;
+    flex-wrap: wrap; /* Allows items to wrap instead of overflowing */
+    z-index: 1000; /* Ensures the nav bar stays above other content */
+    position: relative; /* Prevents it from overlapping */
+}
+
+/* Ensures Nav Links are visible */
+nav a {
+    color: #eeaeac !important; /* Ensures visibility */
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents wrapping issues */
+}
+
+/* Hover State */
+nav a:hover {
+    color: #bf456a !important;
+}
+
+/* ✅ Mobile Fix */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 10px 5px; /* Adjust padding */
+    }
+    
+    nav a {
+        padding: 8px 15px; /* Reduce padding on smaller screens */
+        font-size: 0.9em;
+        display: block; /* Ensures each link stays visible */
+        text-align: center;
+    }
+}
+
+
+section {
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    flex: 1;
+}
+/* ✅ Fully Centering the Entire Instagram Section */
+.instagram-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers horizontally */
+    justify-content: center; /* Centers vertically if needed */
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* ✅ Ensures LightWidget Stays Centered */
+.lightwidget-widget {
+    display: block;
+    width: 100% !important;
+    max-width: 850px !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    margin: 0 auto; /* Forces it to center */
+}
+
+/* ✅ Keeps the Instagram Profile Header Properly Aligned */
+.instagram-profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 850px;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+/* ✅ Forces "Follow" Button to Stay Aligned */
+.instagram-profile-container .follow-button {
+    flex-shrink: 0;
+}
+
+.about-photo {
+    width: 80%;
+    max-width: 700px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.album-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.back-arrow {
+    position: absolute;
+    left: 0;
+    font-size: 1.5em;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.back-arrow:hover {
+    color: #bf456a;
+}
+
+/* Reduce space above section titles */
+section h2 {
+    margin-top: 5px;
+}
+
+.homepage-photo {
+    width: 80%;
+    max-width: 800px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Portfolio Page Styles */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Ensure the album div itself has no background or border */
+.album {
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* ✅ REMOVE any background from album links to fix the hover issue */
+.album a {
+    display: block;
+    text-decoration: none;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important; /* Ensures no extra padding that could cause the box */
+}
+
+/* ✅ REMOVE HOVER BACKGROUND - This was likely the issue */
+.album a:hover,
+.album a:focus {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ✅ REMOVE ANY FORCED BROWSER DEFAULTS */
+.album a:visited,
+.album a:active {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Ensure album images have no borders, backgrounds, or outlines */
+.album img {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* ✅ Only Apply Shadow & Scaling on Hover */
+.album img:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3) !important;
+    transform: scale(1.05);
+    background: none !important;
+    background-color: transparent !important;
+    -webkit-appearance: none; /* Safari-specific */
+}
+
+/* ✅ Forcefully remove any hover/focus styling */
+.album:hover, 
+.album img:hover, 
+.album a:hover {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* ✅ Remove focus styles if they are interfering */
+.album a:focus, 
+.album img:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    border: none !important;
+}
+
+/* ✅ Safari-Specific Fix: Ensure Transparent Background */
+@supports (-webkit-touch-callout: none) {
+    .album img:hover {
+        background: none !important;
+        background-color: transparent !important;
+    }
+}
+
+/* Ensure album descriptions are properly formatted */
+.album p {
+    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+/* Album Page Grid Layout */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* Ensuring images are properly displayed */
+.album-grid img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover effect for images */
+.album-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensures it overlays everything */
+}
+
+/* Ensures images inside lightbox are correctly layered */
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    z-index: 2001; /* Higher than the background */
+}
+.lightbox.active {
+    display: flex;
+}
+
+/* Service Boxes Styling */
+.service-box {
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.service-box img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.service-box p {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* ✅ Keep the Background Image & Default Page Styling */
+body.contact {
+    background: #eeaeac; /* Default pink background */
+    background-image: url('../images/contact/contact-photo.jpg');
+    background-repeat: no-repeat;
+    background-position: center top; /* Ensures image stays at the top */
+    background-size: auto 100vh; /* Keeps full height without stretching */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+}
+
+/* ✅ Container to Keep Everything Centered */
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ensures vertical centering */
+    align-items: center; /* Ensures horizontal centering */
+    width: 100%;
+    flex: 1; /* Makes it fill available space */
+}
+
+/* ✅ Keep Heading Fixed at the Top */
+.contact-header {
+    text-align: center;
+    color: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto; /* Centers it properly */
+    margin-top: 30px; /* Space from navbar */
+    margin-bottom: 20px; /* Space below heading */
+    position: relative; /* Ensures it stays fixed */
+}
+
+/* ✅ Keep the Form Perfectly Centered */
+.contact-box {
+    background: none;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    margin: auto; /* Centers it */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh; /* Adjusted to ensure proper centering */
+}
+
+/* ✅ Fix Form Input Fields */
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+/* ✅ Fix Button */
+.contact-box button {
+    background: #491521;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.contact-box button:hover {
+    background: #bf456a;
+}
+
+
+/* ✅ Override the unwanted hover background */
+.album:hover, 
+.album a:hover, 
+.album img:hover {
+    background: none !important;
+    background-color: transparent !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ✅ Special Safari Fix */
+@supports (-webkit-touch-callout: none) {
+    .album:hover, 
+    .album a:hover, 
+    .album img:hover {
+        background: none !important;
+        background-color: transparent !important;
+        -webkit-appearance: none !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+}

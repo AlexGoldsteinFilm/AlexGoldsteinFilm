@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album - Denver Baby Shoot</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Relative Path to CSS -->
+    <link rel="stylesheet" href="../../../../css/styles.css">
+</head>
+<body>
+    <header>
+        <!-- Instagram Icon Link -->
+        <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" style="text-decoration: none; color: inherit; margin-right: 15px;">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <!-- Clickable Header Title (Relative Path) -->
+        <a href="../../../../index.html" style="text-decoration: none; color: inherit;">
+            <h1>Alex Goldstein Film</h1>
+        </a>
+    </header>
+    
+    <nav>
+        <a href="../../../../index.html">Home</a>
+        <a href="../../../../about.html">About</a>
+        <a href="../../../../portfolio.html">Portfolio</a>
+        <a href="../../../../services.html">Services</a>
+        <a href="../../../../contact.html">Contact</a>
+    </nav>
+
+    <section>
+        <div class="album-header">
+    <a href="../../../../portfolio.html" class="back-arrow">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    <h2>Denver Baby Shoot</h2>
+</div>
+        <p>Baby photoshoot in beautiful Washington Park in Denver, CO, of a lovely growing family</p>
+        <div class="album-grid">
+            <a href="#" onclick="openLightbox('photo1.jpg')">
+                <img src="photo1.jpg" alt="Photo 1">
+            </a>
+            <a href="#" onclick="openLightbox('photo2.jpg')">
+                <img src="photo2.jpg" alt="Photo 2">
+            </a>
+            <a href="#" onclick="openLightbox('cover.jpg')">
+                <img src="cover.jpg" alt="Photo 3">
+            </a>
+        </div>
+    </section>
+ <!-- Lightbox Overlay -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Photo">
+    </div>
+    <footer>
+        <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
+    </footer>
+<script>
+        function openLightbox(imageSrc) {
+            document.getElementById('lightbox-img').src = imageSrc;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
