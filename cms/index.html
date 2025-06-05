@@ -6,5 +6,12 @@
     <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
   </head>
   <body>
+    <script>
+      if (typeof NetlifyCmsApp !== 'undefined') {
+        console.log("✅ Netlify CMS loaded");
+      } else {
+        console.error("❌ Netlify CMS script not found");
+      }
+    </script>
   </body>
 </html>
