@@ -7,16 +7,16 @@
     <!-- Netlify Identity Widget (for login/auth) -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- ✅ Netlify CMS App - working version -->
-    <script src="https://unpkg.com/netlify-cms-app@2.10.192/dist/netlify-cms-app.js"></script>
+    <!-- ✅ Correct CDN version of Netlify CMS -->
+    <script src="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
   </head>
   <body>
     <!-- Required mount point -->
     <div id="nc-root"></div>
 
-    <!-- ✅ Proper initialization -->
+    <!-- ✅ Correct object name: CMS.init() -->
     <script>
-      NetlifyCmsApp.init({
+      CMS.init({
         config: "/cms/config.yml"
       });
     </script>
