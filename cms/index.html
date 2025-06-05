@@ -4,19 +4,19 @@
     <meta charset="utf-8" />
     <title>Alex Goldstein CMS</title>
 
-    <!-- Netlify Identity Widget -->
+    <!-- Identity Widget (for Git Gateway Auth) -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- Netlify CMS (correct working version) -->
-    <script src="https://unpkg.com/netlify-cms@2.10.192/dist/netlify-cms.js"></script>
+    <!-- Netlify CMS Standalone Build -->
+    <script src="https://unpkg.com/netlify-cms-app@2.15.72/dist/netlify-cms-app.js"></script>
   </head>
   <body>
-    <!-- CMS mount point -->
+    <!-- CMS root element required for rendering -->
     <div id="nc-root"></div>
 
     <!-- Initialize CMS -->
     <script>
-      CMS.init({
+      NetlifyCmsApp.init({
         config: "/cms/config.yml"
       });
     </script>
