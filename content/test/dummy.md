@@ -1,4 +1,4 @@
 ---
-title: "Dummy Entry"
+title: "Test"
 ---
-This is just a placeholder file.
+Just a test.
