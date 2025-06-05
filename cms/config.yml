@@ -1,17 +1,22 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: AlexGoldsteinFilm/AlexGoldsteinFilm
   branch: main
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "test"
-    label: "Test Collection"
-    folder: "content/test"
+  - name: "albums"
+    label: "Albums"
+    folder: "content/albums"
     create: true
     slug: "{{slug}}"
     fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Cover Image", name: "cover", widget: "image" }
+      - label: "Gallery Images"
+        name: "gallery"
+        widget: "list"
+        field: { label: "Image", name: "image", widget: "image" }
