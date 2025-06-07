@@ -1,20 +1,20 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: AlexGoldsteinFilm/AlexGoldsteinFilm
   branch: main
-publish_mode: editorial_workflow
-
-media_folder: "images/uploads"      # where uploaded files go in repo
-public_folder: "/images/uploads"    # how site references them
 
 publish_mode: editorial_workflow
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "pages"
     label: "Pages"
     files:
-      - label: "Home"
-        name: "home"
-        file: "index.html"
+      - name: "about"
+        label: "About Page"
+        file: "about.html"
         fields:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
