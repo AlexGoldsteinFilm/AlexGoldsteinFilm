@@ -3,30 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <title>Redirecting to CMS...</title>
+
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      function waitForIdentityInit(callback) {
-        if (window.netlifyIdentity) {
-          window.netlifyIdentity.on("init", () => {
-            callback();
-          });
-          window.netlifyIdentity.init();
+      console.log("📌 DOM ready");
+
+      function redirectToCMS() {
+        const hash = window.location.hash;
+        console.log("🔍 Hash found:", hash);
+
+        if (hash && hash.startsWith("#invite_token")) {
+          const newUrl = "/cms/" + hash;
+          console.log("🚀 Redirecting to:", newUrl);
+          window.location.replace(newUrl);
         } else {
-          // Retry after short delay if widget hasn't loaded yet
-          setTimeout(() => waitForIdentityInit(callback), 100);
+          console.error("❌ No invite token found in URL.");
+          document.body.innerHTML = "<p>Error: No invite token found.</p>";
         }
       }
 
-      waitForIdentityInit(() => {
-        const hash = window.location.hash;
-        if (hash && hash.startsWith("#invite_token")) {
-          // Redirect to /cms/ and preserve the hash token
-          window.location.href = "/cms/" + hash;
-        } else {
-          window.location.href = "/";
+      function initIdentityAndRedirect() {
+        if (!window.netlifyIdentity) {
+          console.error("❌ netlifyIdentity not loaded yet.");
+          setTimeout(initIdentityAndRedirect, 100); // try again shortly
+          return;
         }
-      });
+
+        console.log("✅ netlifyIdentity loaded. Initializing...");
+        window.netlifyIdentity.on("init", () => {
+          console.log("👤 Identity initialized");
+          redirectToCMS();
+        });
+
+        window.netlifyIdentity.init();
+      }
+
+      initIdentityAndRedirect();
     });
   </script>
 </head>
