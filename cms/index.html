@@ -4,37 +4,32 @@
   <meta charset="utf-8" />
   <title>Alex Goldstein CMS</title>
 
-  <!-- ✅ Decap CMS UMD build -->
+  <!-- ✅ Load Decap CMS UMD bundle (defines CMS variable globally) -->
   <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 
-  <!-- ✅ Netlify Identity Widget -->
+  <!-- ✅ Load Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- ✅ Required CMS mount point -->
+  <!-- ✅ Required for Decap CMS -->
   <div id="nc-root"></div>
 
-  <!-- ✅ Initialize CMS after login -->
+  <!-- ✅ Initialize Identity & CMS -->
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
           window.netlifyIdentity.on("login", () => {
-            document.location.href = "/cms/";
+            window.location.reload();
           });
           window.netlifyIdentity.open("login");
         } else {
-          // ✅ Call CMS.init here only when logged in
-          CMS.init({
-            config: "/cms/config.yml"
-          });
+          CMS.init({ config: "/cms/config.yml" });
         }
       });
+      window.netlifyIdentity.init();
     } else {
-      // ✅ Fallback if Identity is not available yet
-      CMS.init({
-        config: "/cms/config.yml"
-      });
+      CMS.init({ config: "/cms/config.yml" });
     }
   </script>
 </body>
