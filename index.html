@@ -2,50 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Redirecting to CMS...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Goldstein Film - Home</title>
 
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      console.log("📌 DOM ready");
-
-      function redirectToCMS() {
-        const hash = window.location.hash;
-        console.log("🔍 Hash found:", hash);
-
-        if (hash && hash.startsWith("#invite_token")) {
-          const newUrl = "/cms/" + hash;
-          console.log("🚀 Redirecting to:", newUrl);
-          window.location.replace(newUrl);
-        } else {
-          console.error("❌ No invite token found in URL.");
-          document.body.innerHTML = "<p>Error: No invite token found.</p>";
-        }
-      }
-
-      function initIdentityAndRedirect() {
-        if (!window.netlifyIdentity) {
-          console.error("❌ netlifyIdentity not loaded yet.");
-          setTimeout(initIdentityAndRedirect, 100); // try again shortly
-          return;
-        }
-
-        console.log("✅ netlifyIdentity loaded. Initializing...");
-        window.netlifyIdentity.on("init", () => {
-          console.log("👤 Identity initialized");
-          redirectToCMS();
-        });
-
-        window.netlifyIdentity.init();
-      }
-
-      initIdentityAndRedirect();
-    });
-  </script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <p>Redirecting to CMS...</p>
+  <header>
+    <!-- Instagram Icon Link -->
+    <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" style="text-decoration: none; color: inherit; margin-right: 15px;">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- Clickable Header Title -->
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <h1>Alex Goldstein Film</h1>
+    </a>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Welcome to Alex Goldstein Film</h2>
+      <p>Capturing your magical moments on film</p>
+      <img src="images/HomePageImage.jpeg" alt="A beautiful film photograph by Alex Goldstein" class="homepage-photo">
+
+      <!-- Instagram Section -->
+      <section class="instagram-section">
+        <h2>Latest from Instagram</h2>
+        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+        <iframe src="//lightwidget.com/widgets/baa022b2cd48537aa4de54ee5d955ab9.html"
+                scrolling="no"
+                allowtransparency="true"
+                class="lightwidget-widget">
+        </iframe>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
+  </footer>
 </body>
 </html>
