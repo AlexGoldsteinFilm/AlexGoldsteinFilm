@@ -1,56 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Goldstein Film - Home</title>
+  <meta charset="UTF-8" />
+  <title>Redirecting to CMS...</title>
+  <script>
+    const url = new URL(window.location.href);
+    const token = url.hash.includes("invite_token") ? url.hash : null;
 
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <link rel="stylesheet" href="css/styles.css">
+    if (token) {
+      window.location.href = "/cms/" + token;
+    } else {
+      window.location.href = "/"; // Optional: default fallback
+    }
+  </script>
 </head>
 <body>
-    <header>
-        <!-- Instagram Icon Link -->
-        <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" style="text-decoration: none; color: inherit; margin-right: 15px;">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <!-- Clickable Header Title -->
-        <a href="index.html" style="text-decoration: none; color: inherit;">
-            <h1>Alex Goldstein Film</h1>
-        </a>
-    </header>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-	<a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
-<main>
-    <section>
-        <h2>Welcome to Alex Goldstein Film</h2>
-        <p>Capturing your magical moments on film</p>
-	<img src="images/HomePageImage.jpeg" alt="A beautiful film photograph by Alex Goldstein" class="homepage-photo">
-	<!-- Instagram Section -->
-<section class="instagram-section">
-    <h2>Latest from Instagram</h2>
-    <!-- LightWidget WIDGET -->
-    <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-    <iframe src="//lightwidget.com/widgets/baa022b2cd48537aa4de54ee5d955ab9.html" 
-        scrolling="no" 
-        allowtransparency="true" 
-        class="lightwidget-widget">
-    </iframe>
-</section>
-</main>
-
-    <footer>
-        <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
-    </footer>
+  <p>If you're not redirected, <a href="/cms/">click here</a>.</p>
 </body>
 </html>
