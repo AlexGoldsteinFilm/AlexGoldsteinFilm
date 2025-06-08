@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Goldstein CMS</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Alex Goldstein CMS</title>
 
-  <!-- ✅ Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- ✅ Decap CMS UMD build that defines `CMS` -->
+    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 
-  <!-- ✅ Decap CMS UMD Build (defines global CMS variable) -->
-  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
-</head>
-<body>
-  <!-- ✅ Required CMS container -->
-  <div id="nc-root"></div>
+    <!-- ✅ Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <div id="nc-root"></div>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.open("login");
+          }
+        });
+      }
 
-  <!-- ✅ Initialize Netlify Identity + CMS -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.open("login");
-        }
+      CMS.init({
+        config: "/cms/config.yml"
       });
-      window.netlifyIdentity.init();
-    }
-
-    CMS.init({
-      config: "/cms/config.yml"
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
