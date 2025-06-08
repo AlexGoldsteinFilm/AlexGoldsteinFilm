@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Alex Goldstein CMS</title>
+<head>
+  <meta charset="utf-8" />
+  <title>Alex Goldstein CMS</title>
 
-    <!-- ✅ Decap CMS UMD build that defines `CMS` -->
-    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
+  <!-- ✅ Decap CMS UMD build -->
+  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 
-    <!-- ✅ Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-    <div id="nc-root"></div>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.open("login");
-          }
-        });
-      }
+  <!-- ✅ Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <!-- ✅ Required CMS mount point -->
+  <div id="nc-root"></div>
 
+  <!-- ✅ Initialize CMS after login -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/cms/";
+          });
+          window.netlifyIdentity.open("login");
+        } else {
+          // ✅ Call CMS.init here only when logged in
+          CMS.init({
+            config: "/cms/config.yml"
+          });
+        }
+      });
+    } else {
+      // ✅ Fallback if Identity is not available yet
       CMS.init({
         config: "/cms/config.yml"
       });
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>
