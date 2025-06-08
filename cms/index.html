@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>Alex Goldstein CMS</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Alex Goldstein CMS</title>
 
-  <!-- ✅ Decap CMS UMD build -->
-  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.umd.js"></script>
+    <!-- ✅ Decap CMS UMD build -->
+    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 
-  <!-- Optional: Netlify Identity Widget if you're using it -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- ✅ CMS mount point -->
-  <div id="nc-root"></div>
+    <!-- Optional: Identity widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- ✅ CMS mount point -->
+    <div id="nc-root"></div>
 
-  <!-- ✅ CMS config -->
-  <script>
-    CMS.init({
-      config: "/cms/config.yml"
-    });
-  </script>
-</body>
+    <!-- ✅ CMS config -->
+    <script>
+      CMS.init({
+        config: "/cms/config.yml"
+      });
+    </script>
+  </body>
 </html>
