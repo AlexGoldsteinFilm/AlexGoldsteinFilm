@@ -4,17 +4,16 @@
   <meta charset="utf-8" />
   <title>Alex Goldstein CMS</title>
 
-  <!-- Decap CMS UMD build that defines `CMS` -->
+  <!-- Decap CMS with UMD build -->
   <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 
   <!-- Optional: Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Required mount point -->
+  <!-- Mount point for Decap CMS -->
   <div id="nc-root"></div>
 
-  <!-- Initialize CMS -->
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
@@ -25,6 +24,7 @@
       window.netlifyIdentity.init();
     }
 
+    // Initialize CMS
     CMS.init({
       config: "/cms/config.yml"
     });
