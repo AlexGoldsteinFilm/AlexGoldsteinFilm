@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <title>Redirecting to CMS...</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    const url = new URL(window.location.href);
-    const token = url.hash.includes("invite_token") ? url.hash : null;
-
-    if (token) {
-      window.location.href = "/cms/" + token;
+    if (window.location.hash.startsWith("#invite_token")) {
+      window.location.href = "/cms/" + window.location.hash;
     } else {
-      window.location.href = "/"; // Optional: default fallback
+      window.location.href = "/"; // fallback
     }
   </script>
 </head>
 <body>
-  <p>If you're not redirected, <a href="/cms/">click here</a>.</p>
+  <p>Redirecting...</p>
 </body>
 </html>
