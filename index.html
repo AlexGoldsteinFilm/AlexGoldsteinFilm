@@ -52,5 +52,15 @@
   <footer>
     <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
   </footer>
+<script>
+  // TEMPORARY FIX: Handle invite token redirect manually
+  const hash = window.location.hash;
+  if (hash.startsWith('#invite_token=')) {
+    const token = hash.split('=')[1];
+    if (token) {
+      window.location.href = `/cms/index.html#invite_token=${token}`;
+    }
+  }
+</script>
 </body>
 </html>
