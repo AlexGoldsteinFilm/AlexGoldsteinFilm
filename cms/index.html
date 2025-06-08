@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alex Goldstein CMS</title>
 
-  <!-- Decap CMS UMD build that defines `CMS` -->
-  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
-
-  <!-- Optional: Netlify Identity Widget -->
+  <!-- ✅ Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- ✅ Decap CMS UMD Build (defines global CMS variable) -->
+  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Required mount point -->
+  <!-- ✅ Required CMS container -->
   <div id="nc-root"></div>
 
-  <!-- Initialize CMS -->
+  <!-- ✅ Initialize Netlify Identity + CMS -->
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
@@ -22,6 +23,7 @@
           window.netlifyIdentity.open("login");
         }
       });
+      window.netlifyIdentity.init();
     }
 
     CMS.init({
