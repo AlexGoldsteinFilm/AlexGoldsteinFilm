@@ -5,22 +5,28 @@
   <title>Redirecting to CMS...</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    // Wait for Netlify Identity to initialize
     document.addEventListener("DOMContentLoaded", function () {
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", () => {
-          const hash = window.location.hash;
-          if (hash.startsWith("#invite_token")) {
-            window.location.href = "/cms/" + hash;
-          } else {
-            window.location.href = "/";
-          }
-        });
-        window.netlifyIdentity.init();
-      } else {
-        // Fallback if identity fails to load
-        window.location.href = "/";
+      function waitForIdentityInit(callback) {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", () => {
+            callback();
+          });
+          window.netlifyIdentity.init();
+        } else {
+          // Retry after short delay if widget hasn't loaded yet
+          setTimeout(() => waitForIdentityInit(callback), 100);
+        }
       }
+
+      waitForIdentityInit(() => {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith("#invite_token")) {
+          // Redirect to /cms/ and preserve the hash token
+          window.location.href = "/cms/" + hash;
+        } else {
+          window.location.href = "/";
+        }
+      });
     });
   </script>
 </head>
