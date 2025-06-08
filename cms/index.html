@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Alex Goldstein CMS</title>
-    <!-- Load Decap CMS -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.6.4/dist/decap-cms.js"></script>
+
+    <!-- ✅ Load Decap CMS with global CMS variable -->
+    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
+
+    <!-- Optional: Netlify Identity -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <!-- This is required for CMS to mount -->
+    <!-- CMS Mount Point -->
     <div id="nc-root"></div>
 
-    <!-- Optional: Netlify Identity Widget (for login) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-    <!-- Initialize CMS -->
+    <!-- ✅ Initialize CMS -->
     <script>
       CMS.init({
         config: "/cms/config.yml"
