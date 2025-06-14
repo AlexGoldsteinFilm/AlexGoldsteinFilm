@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Alex Goldstein CMS</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Alex Goldstein CMS</title>
 
-  <!-- ✅ Decap CMS UMD build that defines `CMS` -->
-  <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.umd.js"></script>
-</head>
-<body>
-  <!-- ✅ Required CMS container -->
-  <div id="nc-root"></div>
+    <!-- ✅ Correct UMD build -->
+    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
+  </head>
+  <body>
+    <!-- ✅ CMS mount point -->
+    <div id="nc-root"></div>
 
-  <!-- ✅ Initialize CMS -->
-  <script>
-    CMS.init({
-      config: "/cms/config.yml"
-    });
-  </script>
-</body>
+    <!-- ✅ CMS init -->
+    <script>
+      CMS.init({
+        config: "/cms/config.yml"
+      });
+    </script>
+  </body>
 </html>
