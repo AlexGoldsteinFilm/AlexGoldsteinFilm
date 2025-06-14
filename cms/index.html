@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <title>Alex Goldstein CMS</title>
 
-    <!-- ✅ Correct UMD build -->
-    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.js"></script>
+    <!-- ✅ Correct UMD build that defines `CMS` -->
+    <script src="https://unpkg.com/decap-cms@3.6.4/dist/decap-cms.umd.js"></script>
   </head>
   <body>
     <!-- ✅ CMS mount point -->
     <div id="nc-root"></div>
 
-    <!-- ✅ CMS init -->
+    <!-- ✅ Initialize CMS -->
     <script>
       CMS.init({
         config: "/cms/config.yml"
