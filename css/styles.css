@@ -101,29 +101,37 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact – full image visible, full-bleed, Safari-safe */
+/* Contact — show full image as a hero below the heading (no cropping) */
 body.contact-page{
-  background-color: var(--pink);
-  /* overlay layer, then photo layer */
-  background-image:
-    linear-gradient(rgba(238,174,172,.42), rgba(238,174,172,.42)),
-    url('../images/contact/contact-photo.jpg');
-  /* overlay covers viewport; photo fits without cropping */
-  background-size: cover, contain;
-  /* center both layers (adjust the second value to nudge the photo, e.g. center 15%) */
-  background-position: center, center;
-  /* no tiling */
-  background-repeat: no-repeat, no-repeat;
-  /* avoid Safari 'fixed' glitch */
-  background-attachment: scroll, scroll;
-  min-height: 100vh;
+  /* plain page background; we’ll render the photo in the hero below */
+  background: var(--pink);
 }
 
-/* Disable the old inner overlay */
+/* don’t use the old overlay-in-container */
 .contact-page .contact-container{ position: relative; }
 .contact-page .contact-container::before{ content: none; }
 
-/* Contact form box */
+/* keep the heading centered (you already have .page-intro centered globally) */
+.contact-page .page-intro{ text-align:center; }
+
+/* HERO IMAGE: full photo, not cropped, displayed under the heading */
+.contact-page .page-intro::after{
+  content:"";
+  display:block;
+  height: min(68vh, 740px);         /* large and responsive */
+  margin-top: 12px;
+  margin-bottom: 16px;
+  background-image:
+    linear-gradient(rgba(238,174,172,.30), rgba(238,174,172,.30)), /* subtle pink veil */
+    url('../images/contact/contact-photo.jpg');                    /* your photo */
+  background-size: cover, contain;   /* overlay fills; photo fits fully */
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Contact form box (unchanged) */
 .contact-form-wrap{
   position: relative;
   background: color-mix(in srgb, var(--pink) 22%, white);
@@ -152,5 +160,9 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
   padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer;
 }
 .btn:hover{ filter:brightness(1.05); }
-
 .contact-alt a{ color:var(--ink); font-weight:600; }
+
+/* Mobile tweak: a bit shorter hero to keep the form visible sooner */
+@media (max-width: 640px){
+  .contact-page .page-intro::after{ height: 56vh; }
+}
