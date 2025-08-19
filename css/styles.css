@@ -101,14 +101,51 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact */
-.contact-page .contact-container{position:relative}
-.contact-page .contact-container::before{content:"";position:absolute;inset:0;background:center/cover no-repeat url('../images/contact/contact-photo.jpg');opacity:.42;pointer-events:none}
-.contact-form-wrap{position:relative;background:color-mix(in srgb,var(--pink) 22%, white);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow-sm);width:min(640px,100%);margin-inline:auto}
-.form-field{margin-bottom:10px}
-label{display:block;font-weight:600;margin-bottom:6px}
-input,textarea{width:100%;border:1px solid color-mix(in srgb,var(--ink) 18%, transparent);border-radius:10px;padding:10px 12px;font-size:1rem;background:var(--white)}
-input:focus,textarea:focus{outline:2px solid var(--wine);outline-offset:1px}
-.btn{appearance:none;border:0;background:var(--wine);color:var(--pink);padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer}
-.btn:hover{filter:brightness(1.05)}
-.contact-alt a{color:var(--ink);font-weight:600}
+/* Contact – full-bleed background */
+body.contact-page{
+  /* photo + subtle pink overlay */
+  background-image:
+    linear-gradient(rgba(238,174,172,.45), rgba(238,174,172,.45)),
+    url('../images/contact/contact-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* nice parallax feel on desktop */
+}
+
+/* The old container overlay is no longer needed */
+.contact-page .contact-container{ position: relative; }
+.contact-page .contact-container::before{ content: none; }
+
+/* Form styles (unchanged) */
+.contact-form-wrap{
+  position: relative;
+  background: color-mix(in srgb, var(--pink) 22%, white);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  width: min(640px, 100%);
+  margin-inline: auto;
+}
+.form-field{ margin-bottom: 10px; }
+label{ display:block; font-weight:600; margin-bottom:6px; }
+input,textarea{
+  width:100%;
+  border:1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:1rem;
+  background:var(--white);
+}
+input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
+.btn{
+  appearance:none; border:0; background:var(--wine); color:var(--pink);
+  padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer;
+}
+.btn:hover{ filter:brightness(1.05); }
+.contact-alt a{ color:var(--ink); font-weight:600; }
+
+/* Mobile: avoid jank from fixed backgrounds */
+@media (max-width: 900px){
+  body.contact-page{ background-attachment: scroll; }
+}
