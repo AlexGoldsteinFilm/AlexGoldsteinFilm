@@ -1,4 +1,4 @@
-// Simple lightbox for album pages
+// Lightbox for album pages
 (function () {
   function initLightbox() {
     const gallery = document.querySelector('.album-gallery');
