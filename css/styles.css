@@ -1,503 +1,135 @@
+
+:root {
+  --pink: #eeaeac;
+  --wine: #491521;
+  --green: #273a38;
+  --ink: #142424;
+  --white: #ffffff;
+  --text: #2b2b2b;
+  --radius: 16px;
+  --shadow-sm: 0 4px 10px rgba(0,0,0,.15);
+  --shadow-md: 0 6px 16px rgba(0,0,0,.2);
+  --max-w: 1100px;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #eeaeac; /* Soft Blush Pink as the full background */
-    color: #333; /* Darker text for better readability */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: var(--text);
+  background: var(--pink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-/* ✅ Ensure Full-Height Layout */
-html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+h1, h2, h3, .brand__title {
+  font-family: "Playfair Display", Georgia, "Times New Roman", Times, serif;
+  color: var(--ink);
+  letter-spacing: .2px;
 }
-
-/* ✅ Ensure Main Content Takes Up Full Space */
-main {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Centers Instagram widget */
-    padding-bottom: 20px; /* Adds spacing before footer */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: clamp(16px, 2.5vw, 32px);
+  flex: 1 0 auto;
 }
-
-/* Footer Styling - Ensures it spans full width and stays at bottom */
-footer {
-    background-color: #142424;
-    color: #eeaeac;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    margin-top: auto;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
-
-/* Header Styling */
-header {
-    background-color: #491521; /* Dark Wine Red */
-    color: #eeaeac; /* Soft Blush Pink text */
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.skip-link {
+  position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
 }
-
-header a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
+.skip-link:focus {
+  position: fixed; left: 16px; top: 16px; width: auto; height: auto;
+  padding: 10px 14px; background: var(--wine); color: var(--pink); border-radius: 10px; z-index: 10000;
 }
-
-.instagram-link {
-    font-size: 1.5em; /* Smaller icon */
-    margin-right: 10px; /* Space between icon and title */
-    color: #eeaeac;
-    text-decoration: none;
+.site-header { background: var(--wine); color: var(--pink); box-shadow: var(--shadow-sm); }
+.site-header__inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 14px clamp(16px, 2.5vw, 32px);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
 }
-
-.instagram-link:hover {
-    color: #e1306c;
+.brand { text-decoration: none; }
+.brand__title { font-size: clamp(24px, 3.2vw, 32px); color: var(--pink); }
+.site-nav { position: relative; }
+.site-nav ul { display: flex; gap: clamp(6px, 1.8vw, 18px); list-style: none; margin: 0; padding: 0; }
+.nav-link {
+  display: inline-block; padding: 8px 14px; text-decoration: none; color: var(--pink); font-weight: 600; border-radius: 10px;
 }
-
-h1 {
-    font-size: 2em; /* Consistent title size */
-    margin: 0;
+.nav-link:hover, .nav-link:focus {
+  background: color-mix(in srgb, var(--pink) 22%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--pink) 40%, transparent);
+  outline-offset: 2px;
 }
-
-/* Navigation Styling */
-nav {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Ensures proper vertical alignment */
-    background-color: #273a38; /* Dark Green */
-    padding: 10px;
-    flex-wrap: wrap; /* Allows items to wrap instead of overflowing */
-    z-index: 1000; /* Ensures the nav bar stays above other content */
-    position: relative; /* Prevents it from overlapping */
+.menu-toggle { display: none; background: transparent; border: 0; color: var(--pink); font-size: 20px; padding: 8px 10px; border-radius: 10px; }
+.menu-toggle:focus-visible { outline: 2px solid var(--pink); }
+.ig-link { color: var(--pink); font-size: 22px; text-decoration: none; }
+.ig-link:hover { color: #e1306c; }
+@media (max-width: 800px) {
+  .site-header__inner { grid-template-columns: auto auto 1fr; }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .site-nav ul {
+    position: absolute; right: 0; top: 100%; background: var(--green); padding: 10px; border-radius: 12px;
+    box-shadow: var(--shadow-md); display: none; flex-direction: column; min-width: 220px; z-index: 999;
+  }
+  .site-nav[aria-expanded="true"] ul, .site-nav ul.open { display: flex; }
+  .nav-link { color: var(--pink); }
 }
-
-/* Ensures Nav Links are visible */
-nav a {
-    color: #eeaeac !important; /* Ensures visibility */
-    text-decoration: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    white-space: nowrap; /* Prevents wrapping issues */
+.site-footer { margin-top: auto; background: var(--ink); color: var(--pink); text-align: center; padding: 12px 16px; }
+.hero { text-align: center; }
+.hero h1 { font-size: clamp(32px, 5vw, 56px); margin: 0 0 8px; }
+.tagline { font-size: clamp(16px, 2.4vw, 20px); color: var(--ink); margin: 0 0 20px; }
+.hero-image { width: min(100%, 900px); margin: 0 auto 10px; }
+.instagram-section { margin-top: 8px; text-align: center; }
+.instagram-wrapper { max-width: 900px; margin: 0 auto; }
+.lightwidget-widget { width: 100%; border: 0; box-shadow: none; }
+.ig-cta a {
+  display: inline-block; margin-top: 8px; color: var(--ink);
+  background: color-mix(in srgb, var(--pink) 40%, white);
+  text-decoration: none; padding: 8px 12px; border-radius: 999px; font-weight: 600;
 }
-
-/* Hover State */
-nav a:hover {
-    color: #bf456a !important;
+.ig-cta a:hover { background: color-mix(in srgb, var(--pink) 55%, white); }
+.page-intro { text-align: center; margin-bottom: 10px; }
+.page-intro p { color: var(--ink); }
+.content-block {
+  display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; margin-bottom: 14px;
 }
-
-/* ✅ Mobile Fix */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 10px 5px; /* Adjust padding */
-    }
-    
-    nav a {
-        padding: 8px 15px; /* Reduce padding on smaller screens */
-        font-size: 0.9em;
-        display: block; /* Ensures each link stays visible */
-        text-align: center;
-    }
+.content-block p { margin: 0; }
+@media (min-width: 820px) { .content-block { grid-template-columns: 46% 1fr; } }
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.album-card {
+  background: color-mix(in srgb, var(--pink) 15%, white); border-radius: var(--radius); padding: 10px;
+  box-shadow: var(--shadow-sm); transition: transform .2s ease, box-shadow .2s ease;
 }
-
-
-section {
-    padding: 20px;
-    text-align: center;
-    color: #fff;
-    border-radius: 10px;
-    margin: 10px;
-    flex: 1;
+.album-link { text-decoration: none; color: inherit; display: block; }
+.album-title { text-align: center; margin: 10px 0 0; color: var(--ink); font-size: 1.1rem; }
+.album-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.service-card { background: var(--white); color: var(--text); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-sm); }
+.service-card .price { font-weight: 700; color: var(--ink); }
+.service-info ul { background: color-mix(in srgb, var(--pink) 18%, white); padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.contact-page { background: var(--pink); }
+.contact-container { position: relative; }
+.contact-container::before {
+  content: ""; position: absolute; inset: 0; background: center/cover no-repeat url('../images/contact/contact-photo.jpg'); opacity: .18; border-radius: 0; pointer-events: none;
 }
-/* ✅ Fully Centering the Entire Instagram Section */
-.instagram-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers horizontally */
-    justify-content: center; /* Centers vertically if needed */
-    text-align: center;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px 0;
+.contact-form-wrap {
+  position: relative; background: color-mix(in srgb, var(--pink) 35%, white);
+  padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow-sm); width: min(600px, 100%); margin-inline: auto;
 }
-
-/* ✅ Ensures LightWidget Stays Centered */
-.lightwidget-widget {
-    display: block;
-    width: 100% !important;
-    max-width: 850px !important;
-    border: none !important;
-    box-shadow: none !important;
-    background: none !important;
-    margin: 0 auto; /* Forces it to center */
+.form-field { margin-bottom: 10px; }
+label { display: block; font-weight: 600; margin-bottom: 6px; }
+input, textarea {
+  width: 100%; border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); border-radius: 10px; padding: 10px 12px; font-size: 1rem; background: var(--white);
 }
-
-/* ✅ Keeps the Instagram Profile Header Properly Aligned */
-.instagram-profile-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 850px;
-    margin-bottom: 10px;
-    gap: 10px;
-}
-
-/* ✅ Forces "Follow" Button to Stay Aligned */
-.instagram-profile-container .follow-button {
-    flex-shrink: 0;
-}
-
-.about-photo {
-    width: 80%;
-    max-width: 700px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.album-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.back-arrow {
-    position: absolute;
-    left: 0;
-    font-size: 1.5em;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    padding-left: 15px;
-}
-
-.back-arrow:hover {
-    color: #bf456a;
-}
-
-/* Reduce space above section titles */
-section h2 {
-    margin-top: 5px;
-}
-
-.homepage-photo {
-    width: 80%;
-    max-width: 800px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Portfolio Page Styles */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-}
-
-/* Ensure the album div itself has no background or border */
-.album {
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-}
-
-/* ✅ REMOVE any background from album links to fix the hover issue */
-.album a {
-    display: block;
-    text-decoration: none;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    padding: 0 !important; /* Ensures no extra padding that could cause the box */
-}
-
-/* ✅ REMOVE HOVER BACKGROUND - This was likely the issue */
-.album a:hover,
-.album a:focus {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* ✅ REMOVE ANY FORCED BROWSER DEFAULTS */
-.album a:visited,
-.album a:active {
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-}
-
-/* Ensure album images have no borders, backgrounds, or outlines */
-.album img {
-    width: 100%;
-    max-width: 300px;
-    height: 400px;
-    object-fit: contain;
-    border-radius: 10px;
-    display: block;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* ✅ Only Apply Shadow & Scaling on Hover */
-.album img:hover {
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3) !important;
-    transform: scale(1.05);
-    background: none !important;
-    background-color: transparent !important;
-    -webkit-appearance: none; /* Safari-specific */
-}
-
-/* ✅ Forcefully remove any hover/focus styling */
-.album:hover, 
-.album img:hover, 
-.album a:hover {
-    background: none !important;
-    background-color: transparent !important;
-    border: none !important;
-    outline: none !important;
-}
-
-/* ✅ Remove focus styles if they are interfering */
-.album a:focus, 
-.album img:focus {
-    outline: none !important;
-    box-shadow: none !important;
-    background: none !important;
-    border: none !important;
-}
-
-/* ✅ Safari-Specific Fix: Ensure Transparent Background */
-@supports (-webkit-touch-callout: none) {
-    .album img:hover {
-        background: none !important;
-        background-color: transparent !important;
-    }
-}
-
-/* Ensure album descriptions are properly formatted */
-.album p {
-    margin-top: 10px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-}
-
-/* Album Page Grid Layout */
-.album-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
-    padding: 20px;
-    justify-items: center;
-    align-items: center;
-}
-
-/* Ensuring images are properly displayed */
-.album-grid img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 350px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-    background: none !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* Hover effect for images */
-.album-grid img:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 2000; /* Ensures it overlays everything */
-}
-
-/* Ensures images inside lightbox are correctly layered */
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-    z-index: 2001; /* Higher than the background */
-}
-.lightbox.active {
-    display: flex;
-}
-
-/* Service Boxes Styling */
-.service-box {
-    background: #fff;
-    color: #333;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.service-box img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.service-box p {
-    font-size: 1.1em;
-    margin-top: 10px;
-}
-
-/* ✅ Keep the Background Image & Default Page Styling */
-body.contact {
-    background: #eeaeac; /* Default pink background */
-    background-image: url('../images/contact/contact-photo.jpg');
-    background-repeat: no-repeat;
-    background-position: center top; /* Ensures image stays at the top */
-    background-size: auto 100vh; /* Keeps full height without stretching */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures full viewport height */
-}
-
-/* ✅ Container to Keep Everything Centered */
-.contact-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Ensures vertical centering */
-    align-items: center; /* Ensures horizontal centering */
-    width: 100%;
-    flex: 1; /* Makes it fill available space */
-}
-
-/* ✅ Keep Heading Fixed at the Top */
-.contact-header {
-    text-align: center;
-    color: white;
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto; /* Centers it properly */
-    margin-top: 30px; /* Space from navbar */
-    margin-bottom: 20px; /* Space below heading */
-    position: relative; /* Ensures it stays fixed */
-}
-
-/* ✅ Keep the Form Perfectly Centered */
-.contact-box {
-    background: none;
-    padding: 20px;
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
-    margin: auto; /* Centers it */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh; /* Adjusted to ensure proper centering */
-}
-
-/* ✅ Fix Form Input Fields */
-.contact-box input,
-.contact-box textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.9em;
-}
-
-/* ✅ Fix Button */
-.contact-box button {
-    background: #491521;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-.contact-box button:hover {
-    background: #bf456a;
-}
-
-
-/* ✅ Override the unwanted hover background */
-.album:hover, 
-.album a:hover, 
-.album img:hover {
-    background: none !important;
-    background-color: transparent !important;
-    -webkit-appearance: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-/* ✅ Special Safari Fix */
-@supports (-webkit-touch-callout: none) {
-    .album:hover, 
-    .album a:hover, 
-    .album img:hover {
-        background: none !important;
-        background-color: transparent !important;
-        -webkit-appearance: none !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-}
+input:focus, textarea:focus { outline: 2px solid var(--wine); outline-offset: 1px; }
+.btn { appearance: none; border: 0; background: var(--wine); color: var(--pink); padding: 10px 14px; border-radius: 999px; font-weight: 700; cursor: pointer; }
+.btn:hover { filter: brightness(1.05); }
+.contact-alt a { color: var(--ink); font-weight: 600; }
+.sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }

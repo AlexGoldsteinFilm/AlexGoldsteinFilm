@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Goldstein Film - Home</title>
+  <title>Alex Goldstein Film — Timeless Film Photography</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Timeless film photography in Colorado by Alex Goldstein — portraits, couples, families, and handcrafted darkroom prints." />
+<meta name="theme-color" content="#491521" />
+<meta property="og:title" content="Alex Goldstein Film" />
+<meta property="og:site_name" content="Alex Goldstein Film" />
+<meta property="og:description" content="Timeless film photography in Colorado by Alex Goldstein — portraits, couples, families, and handcrafted darkroom prints." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://alexgoldsteinfilm.com/" />
+<meta property="og:image" content="https://alexgoldsteinfilm.com/images/og-default.jpg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfPWw5qvFjgLG3rGZrjXKjN3rV6V4IVV1iJQGf0S+X7i2GfZ8+8D1gVA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <!-- Instagram Icon Link -->
-    <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" style="text-decoration: none; color: inherit; margin-right: 15px;">
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand__title">Alex Goldstein Film</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="ig-link" href="https://www.instagram.com/agoldsteinfilm/" target="_blank" rel="noopener" aria-label="Instagram">
       <i class="fa-brands fa-instagram"></i>
     </a>
+  </div>
+</header>
 
-    <!-- Clickable Header Title -->
-    <a href="index.html" style="text-decoration: none; color: inherit;">
-      <h1>Alex Goldstein Film</h1>
-    </a>
-  </header>
+<main id="content" class="container">
+  <section class="hero">
+    <h1>Timeless film photography.</h1>
+    <p class="tagline">Portraits, couples, families &amp; handcrafted darkroom prints.</p>
+    <img src="images/HomePageImage.jpeg" alt="Sample film photograph by Alex Goldstein" class="hero-image" loading="eager" />
+  </section>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="services.html">Services</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <section class="instagram-section">
+    <h2>Latest from Instagram</h2>
+    <div class="instagram-wrapper">
+      <script src="https://cdn.lightwidget.com/widgets/lightwidget.js" async></script>
+      <iframe
+        src="//lightwidget.com/widgets/baa022b2cd48537aa4de54ee5d955ab9.html"
+        title="Instagram gallery"
+        scrolling="no"
+        allowtransparency="true"
+        class="lightwidget-widget"
+        style="width:100%;border:0;overflow:hidden">
+      </iframe>
+      <p class="ig-cta">
+        <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" rel="noopener">Follow @agoldsteinfilm</a>
+      </p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer" role="contentinfo">
+  <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
+</footer>
+<script src="js/main.js" defer></script>
 
-  <main>
-    <section>
-      <h2>Welcome to Alex Goldstein Film</h2>
-      <p>Capturing your magical moments on film</p>
-      <img src="images/HomePageImage.jpeg" alt="A beautiful film photograph by Alex Goldstein" class="homepage-photo">
-
-      <!-- Instagram Section -->
-      <section class="instagram-section">
-        <h2>Latest from Instagram</h2>
-        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-        <iframe src="//lightwidget.com/widgets/baa022b2cd48537aa4de54ee5d955ab9.html"
-                scrolling="no"
-                allowtransparency="true"
-                class="lightwidget-widget">
-        </iframe>
-      </section>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
-  </footer>
-<script>
-  // TEMPORARY FIX: Handle invite token redirect manually
-  const hash = window.location.hash;
-  if (hash.startsWith('#invite_token=')) {
-    const token = hash.split('=')[1];
-    if (token) {
-      window.location.href = `/cms/index.html#invite_token=${token}`;
-    }
-  }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alex Goldstein",
+  "jobTitle": "Photographer",
+  "description": "Timeless film photography in Colorado \u2014 portraits, couples, families, and handcrafted darkroom prints.",
+  "url": "https://alexgoldsteinfilm.com/",
+  "sameAs": [
+    "https://www.instagram.com/agoldsteinfilm/"
+  ],
+  "image": "https://alexgoldsteinfilm.com/images/og-default.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Denver",
+    "addressRegion": "CO",
+    "addressCountry": "US"
+  },
+  "areaServed": "Colorado"
+}
 </script>
 </body>
 </html>

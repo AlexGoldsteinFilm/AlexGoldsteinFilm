@@ -1,56 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Goldstein Film - Portfolio</title>
+  <title>Portfolio — Alex Goldstein Film</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Timeless film photography in Colorado by Alex Goldstein — portraits, couples, families, and handcrafted darkroom prints." />
+<meta name="theme-color" content="#491521" />
+<meta property="og:title" content="Alex Goldstein Film" />
+<meta property="og:site_name" content="Alex Goldstein Film" />
+<meta property="og:description" content="Timeless film photography in Colorado by Alex Goldstein — portraits, couples, families, and handcrafted darkroom prints." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://alexgoldsteinfilm.com/" />
+<meta property="og:image" content="https://alexgoldsteinfilm.com/images/og-default.jpg" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfPWw5qvFjgLG3rGZrjXKjN3rV6V4IVV1iJQGf0S+X7i2GfZ8+8D1gVA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="css/styles.css" />
 
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <!-- Instagram Icon Link -->
-        <a href="https://www.instagram.com/agoldsteinfilm/" target="_blank" style="text-decoration: none; color: inherit; margin-right: 15px;">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-
-        <!-- Clickable Header Title -->
-        <a href="index.html" style="text-decoration: none; color: inherit;">
-            <h1>Alex Goldstein Film</h1>
-        </a>
-    </header>
-    
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html">Contact</a>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand__title">Alex Goldstein Film</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul id="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
     </nav>
+    <a class="ig-link" href="https://www.instagram.com/agoldsteinfilm/" target="_blank" rel="noopener" aria-label="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+  </div>
+</header>
 
-    <section>
-    <h2>Portfolio</h2>
-    <p>Explore a collection of our finest film photography work.</p>
-    <div class="portfolio-grid">
-        <div class="album">
-            <a href="images/portfolio/denver-baby-shoot/albumindex-denver-baby-shoot.html">
-                <img src="images/portfolio/denver-baby-shoot/cover.jpg" alt="Denver Baby Shoot">
-                <p>Denver Baby Shoot</p>
-            </a>
-        </div>
-        <div class="album">
-            <a href="images/portfolio/leadville-engagement-shoot/albumindex-leadville-engagement-shoot.html">
-                <img src="images/portfolio/leadville-engagement-shoot/cover.jpeg" alt="Leadville Engagement Shoot">
-                <p>Leadville Engagement Shoot</p>
-            </a>
-        </div>
-    </div>
-</section>
+<main id="content" class="container">
+  <section class="page-intro">
+    <h1>Portfolio</h1>
+    <p>Selected albums. More coming soon.</p>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
-    </footer>
+  <section class="portfolio-grid" aria-label="Portfolio albums">
+    <article class="album-card">
+      <a href="images/portfolio/denver-baby-shoot/albumindex-denver-baby-shoot.html" class="album-link">
+        <img src="images/portfolio/denver-baby-shoot/cover.jpg" alt="Denver Baby Shoot" loading="lazy" />
+        <h2 class="album-title">Denver Baby Shoot</h2>
+      </a>
+    </article>
+    <article class="album-card">
+      <a href="images/portfolio/leadville-engagement-shoot/albumindex-leadville-engagement-shoot.html" class="album-link">
+        <img src="images/portfolio/leadville-engagement-shoot/cover.jpeg" alt="Leadville Engagement Shoot" loading="lazy" />
+        <h2 class="album-title">Leadville Engagement Shoot</h2>
+      </a>
+    </article>
+  </section>
+</main>
+<footer class="site-footer" role="contentinfo">
+  <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
+</footer>
+<script src="js/main.js" defer></script>
+
 </body>
 </html>
