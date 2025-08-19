@@ -1,14 +1,12 @@
-// Minimal site JS: mobile nav only
+// Mobile nav for separate subnav
 (function () {
-  const siteNav = document.querySelector('.site-nav');
+  const subnav = document.querySelector('.site-subnav');
   const toggle = document.querySelector('.menu-toggle');
-  if (siteNav && toggle) {
+  if (subnav && toggle) {
     toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      const expanded = subnav.getAttribute('aria-expanded') === 'true';
+      subnav.setAttribute('aria-expanded', String(!expanded));
       toggle.setAttribute('aria-expanded', String(!expanded));
-      siteNav.setAttribute('aria-expanded', String(!expanded));
-      const list = siteNav.querySelector('ul');
-      if (list) list.classList.toggle('open');
     });
   }
 })();
