@@ -101,45 +101,49 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact — show full image as a hero below the heading (no cropping) */
+/* Contact — background photo behind content (like original), Safari-safe */
 body.contact-page{
-  /* plain page background; we’ll render the photo in the hero below */
+  /* page background stays pink; the photo lives inside the container below */
   background: var(--pink);
 }
 
-/* don’t use the old overlay-in-container */
-.contact-page .contact-container{ position: relative; }
-.contact-page .contact-container::before{ content: none; }
-
-/* keep the heading centered (you already have .page-intro centered globally) */
-.contact-page .page-intro{ text-align:center; }
-
-/* HERO IMAGE: full photo, not cropped, displayed under the heading */
-.contact-page .page-intro::after{
-  content:"";
-  display:block;
-  height: min(68vh, 740px);         /* large and responsive */
-  margin-top: 12px;
-  margin-bottom: 16px;
-  background-image:
-    linear-gradient(rgba(238,174,172,.30), rgba(238,174,172,.30)), /* subtle pink veil */
-    url('../images/contact/contact-photo.jpg');                    /* your photo */
-  background-size: cover, contain;   /* overlay fills; photo fits fully */
-  background-position: center, center;
-  background-repeat: no-repeat, no-repeat;
+/* Make the centered content area host the background image */
+.contact-page .contact-container{
+  position: relative;
+  isolation: isolate;          /* keep the ::before layer behind only this container */
+  min-height: 80vh;            /* ensure the image area feels full-page */
   border-radius: var(--radius);
+  overflow: hidden;            /* rounds the image corners to match the container */
   box-shadow: var(--shadow-sm);
 }
 
-/* Contact form box (unchanged) */
+/* The actual background image + a subtle pink veil */
+.contact-page .contact-container::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(238,174,172,.28), rgba(238,174,172,.28)), /* overlay */
+    url('../images/contact/contact-photo.jpg');
+  background-size: cover, cover;      /* immersive look like the original */
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: scroll;      /* avoids Safari fixed-background glitches */
+  z-index: -1;                        /* sit behind the text & form */
+}
+
+/* (You already centered page headings globally with .page-intro) */
+
+/* Contact form card (kept from your updated design) */
 .contact-form-wrap{
   position: relative;
-  background: color-mix(in srgb, var(--pink) 22%, white);
+  background: color-mix(in srgb, var(--pink) 22%, white); /* soft, readable */
   padding: 16px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   width: min(640px, 100%);
   margin-inline: auto;
+  margin-bottom: 16px;
 }
 
 .form-field{ margin-bottom: 10px; }
@@ -151,7 +155,7 @@ input,textarea{
   border-radius:10px;
   padding:10px 12px;
   font-size:1rem;
-  background:var(--white);
+  background: var(--white);
 }
 input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 
@@ -160,9 +164,10 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
   padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer;
 }
 .btn:hover{ filter:brightness(1.05); }
+
 .contact-alt a{ color:var(--ink); font-weight:600; }
 
-/* Mobile tweak: a bit shorter hero to keep the form visible sooner */
+/* Small-screen tune: no change to behavior, just a bit more room */
 @media (max-width: 640px){
-  .contact-page .page-intro::after{ height: 56vh; }
+  .contact-page .contact-container{ min-height: 72vh; }
 }
