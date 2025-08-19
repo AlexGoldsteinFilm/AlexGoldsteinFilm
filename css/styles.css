@@ -101,73 +101,95 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact — background photo behind content (like original), Safari-safe */
+/* Contact — background photo behind content (original feel), no form box */
 body.contact-page{
-  /* page background stays pink; the photo lives inside the container below */
   background: var(--pink);
 }
 
-/* Make the centered content area host the background image */
+/* The centered content area hosts the background image */
 .contact-page .contact-container{
   position: relative;
-  isolation: isolate;          /* keep the ::before layer behind only this container */
-  min-height: 80vh;            /* ensure the image area feels full-page */
+  isolation: isolate;          /* keep the ::before behind only this area */
+  min-height: 80vh;
   border-radius: var(--radius);
-  overflow: hidden;            /* rounds the image corners to match the container */
+  overflow: hidden;            /* rounds photo corners to match */
   box-shadow: var(--shadow-sm);
 }
 
-/* The actual background image + a subtle pink veil */
+/* Full-bleed image + subtle pink veil */
 .contact-page .contact-container::before{
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(238,174,172,.28), rgba(238,174,172,.28)), /* overlay */
+    linear-gradient(rgba(238,174,172,.28), rgba(238,174,172,.28)),
     url('../images/contact/contact-photo.jpg');
-  background-size: cover, cover;      /* immersive look like the original */
+  background-size: cover, cover;      /* immersive look */
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
-  background-attachment: scroll;      /* avoids Safari fixed-background glitches */
-  z-index: -1;                        /* sit behind the text & form */
+  background-attachment: scroll;      /* avoids Safari fixed glitches */
+  z-index: -1;
 }
 
-/* (You already centered page headings globally with .page-intro) */
+/* Headline text readable over photo */
+.contact-page .page-intro{ text-align:center; }
+.contact-page .page-intro h1,
+.contact-page .page-intro p{
+  color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
 
-/* Contact form card (kept from your updated design) */
+/* Form: transparent wrapper (no box), fields float over the photo */
 .contact-form-wrap{
   position: relative;
-  background: color-mix(in srgb, var(--pink) 22%, white); /* soft, readable */
-  padding: 16px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  width: min(640px, 100%);
+  background: transparent;     /* <-- no box */
+  padding: 0;                  /* remove card padding */
+  border-radius: 0;
+  box-shadow: none;
+  width: min(720px, 100%);
   margin-inline: auto;
   margin-bottom: 16px;
 }
 
-.form-field{ margin-bottom: 10px; }
-label{ display:block; font-weight:600; margin-bottom:6px; }
+/* Labels + helper text readable on photo */
+.form-field{ margin-bottom: 12px; }
+.contact-page label{
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+  color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
 
+/* Inputs: keep light backgrounds for readability, no wrapper box */
 input,textarea{
   width:100%;
   border:1px solid color-mix(in srgb, var(--ink) 18%, transparent);
-  border-radius:10px;
-  padding:10px 12px;
+  border-radius:12px;
+  padding:12px 14px;
   font-size:1rem;
-  background: var(--white);
+  background: rgba(255,255,255,.92);
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
+input::placeholder, textarea::placeholder{ color:#666; }
 input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 
+/* Button on photo */
 .btn{
   appearance:none; border:0; background:var(--wine); color:var(--pink);
   padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.20);
 }
 .btn:hover{ filter:brightness(1.05); }
 
-.contact-alt a{ color:var(--ink); font-weight:600; }
+/* Email line over photo */
+.contact-alt a{
+  color:#fff;
+  font-weight:600;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
 
-/* Small-screen tune: no change to behavior, just a bit more room */
+/* Small-screen tune */
 @media (max-width: 640px){
   .contact-page .contact-container{ min-height: 72vh; }
 }
