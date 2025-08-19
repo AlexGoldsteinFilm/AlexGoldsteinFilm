@@ -1,12 +1,2 @@
-// Mobile nav for separate subnav
-(function () {
-  const subnav = document.querySelector('.site-subnav');
-  const toggle = document.querySelector('.menu-toggle');
-  if (subnav && toggle) {
-    toggle.addEventListener('click', () => {
-      const expanded = subnav.getAttribute('aria-expanded') === 'true';
-      subnav.setAttribute('aria-expanded', String(!expanded));
-      toggle.setAttribute('aria-expanded', String(!expanded));
-    });
-  }
-})();
+// Mobile nav
+(function(){const subnav=document.querySelector('.site-subnav');const toggle=document.querySelector('.menu-toggle');if(subnav&&toggle){toggle.addEventListener('click',()=>{const e=subnav.getAttribute('aria-expanded')==='true';subnav.setAttribute('aria-expanded',String(!e));toggle.setAttribute('aria-expanded',String(!e));});}})();
