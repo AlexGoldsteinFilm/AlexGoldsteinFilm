@@ -101,19 +101,20 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact – full-bleed background */
+/* Contact – full-bleed background (Safari-safe) */
 body.contact-page{
-  /* photo + subtle pink overlay */
+  background-color: var(--pink);
   background-image:
-    linear-gradient(rgba(238,174,172,.45), rgba(238,174,172,.45)),
+    linear-gradient(rgba(238,174,172,.42), rgba(238,174,172,.42)),
     url('../images/contact/contact-photo.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: cover;          /* fill the viewport */
+  background-position: center top; /* bias toward the top so faces aren't cropped */
   background-repeat: no-repeat;
-  background-attachment: fixed; /* nice parallax feel on desktop */
+  background-attachment: scroll;   /* avoid Safari 'fixed' rendering bug */
+  min-height: 100vh;
 }
 
-/* The old container overlay is no longer needed */
+/* Disable the old container overlay */
 .contact-page .contact-container{ position: relative; }
 .contact-page .contact-container::before{ content: none; }
 
@@ -144,8 +145,3 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 }
 .btn:hover{ filter:brightness(1.05); }
 .contact-alt a{ color:var(--ink); font-weight:600; }
-
-/* Mobile: avoid jank from fixed backgrounds */
-@media (max-width: 900px){
-  body.contact-page{ background-attachment: scroll; }
-}
