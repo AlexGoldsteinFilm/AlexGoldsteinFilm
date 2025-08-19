@@ -1,2 +1,2 @@
-// Mobile nav
+// Mobile nav toggle
 (function(){const subnav=document.querySelector('.site-subnav');const toggle=document.querySelector('.menu-toggle');if(subnav&&toggle){toggle.addEventListener('click',()=>{const e=subnav.getAttribute('aria-expanded')==='true';subnav.setAttribute('aria-expanded',String(!e));toggle.setAttribute('aria-expanded',String(!e));});}})();
