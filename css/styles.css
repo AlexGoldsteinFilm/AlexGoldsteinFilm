@@ -193,3 +193,33 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 @media (max-width: 640px){
   .contact-page .contact-container{ min-height: 72vh; }
 }
+/* Back link (top-left on album pages) */
+.crumbs { margin-bottom: 8px; }
+.back-link{
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--ink); text-decoration:none; font-weight:600;
+}
+.back-link .arrow{ font-size:20px; line-height:1; }
+.back-link:hover{ text-decoration:underline; }
+
+/* Album gallery: keep original aspect, no frames, clean hover */
+.album-gallery{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap:16px; align-items:start;
+}
+.album-gallery img{
+  width:100%; height:auto; display:block;
+  background:transparent !important; padding:0 !important; border:0 !important;
+  border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  object-fit: contain; cursor: zoom-in; /* for lightbox */
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.album-gallery img:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+/* Lightbox: hide close until opened */
+.lb-close{ display:none; position:fixed; top:14px; right:16px; z-index:10001;
+  background:rgba(0,0,0,.35); color:#fff; border:0; border-radius:999px;
+  padding:10px 12px; font-size:20px; cursor:pointer;
+}
+.lb-close.open{ display:block; }
