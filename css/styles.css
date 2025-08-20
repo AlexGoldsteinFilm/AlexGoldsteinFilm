@@ -101,37 +101,31 @@ img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-sha
 .service-card .price{font-weight:700;color:var(--ink)}
 .service-info ul{background:transparent;box-shadow:none;padding-left:22px;border-radius:0}
 
-/* Contact — background photo behind content (original feel), no form box */
+/* Contact — full photo as page background (no crop), updated transparent form */
 body.contact-page{
-  background: var(--pink);
+  /* Photo sits on the BODY so it reaches the footer */
+  background-image:
+    linear-gradient(rgba(238,174,172,.30), rgba(238,174,172,.30)), /* subtle veil */
+    url('../images/contact/contact-photo.jpg');                    /* your photo */
+  background-size: cover, contain;      /* veil covers viewport; photo FITS fully */
+  background-position: center, center;  /* nudge the 2nd value if you want: center 12% */
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: scroll, scroll;/* Safari-safe */
+  background-color: var(--pink);        /* side bars when using 'contain' */
 }
 
-/* The centered content area hosts the background image */
+/* The centered content column no longer provides the background */
 .contact-page .contact-container{
   position: relative;
-  isolation: isolate;          /* keep the ::before behind only this area */
-  min-height: 80vh;
-  border-radius: var(--radius);
-  overflow: hidden;            /* rounds photo corners to match */
-  box-shadow: var(--shadow-sm);
+  isolation: auto;
+  min-height: 80vh;       /* keeps the section tall so the photo is visible */
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
 }
+.contact-page .contact-container::before{ content: none; }
 
-/* Full-bleed image + subtle pink veil */
-.contact-page .contact-container::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(238,174,172,.28), rgba(238,174,172,.28)),
-    url('../images/contact/contact-photo.jpg');
-  background-size: cover, cover;      /* immersive look */
-  background-position: center, center;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: scroll;      /* avoids Safari fixed glitches */
-  z-index: -1;
-}
-
-/* Headline text readable over photo */
+/* Headline readable over the photo */
 .contact-page .page-intro{ text-align:center; }
 .contact-page .page-intro h1,
 .contact-page .page-intro p{
@@ -139,42 +133,34 @@ body.contact-page{
   text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
 
-/* Form: transparent wrapper (no box), fields float over the photo */
+/* Transparent form (no blocking box) */
 .contact-form-wrap{
   position: relative;
-  background: transparent;     /* <-- no box */
-  padding: 0;                  /* remove card padding */
+  background: transparent;
+  padding: 0;
   border-radius: 0;
   box-shadow: none;
   width: min(720px, 100%);
   margin-inline: auto;
   margin-bottom: 16px;
 }
-
-/* Labels + helper text readable on photo */
 .form-field{ margin-bottom: 12px; }
 .contact-page label{
-  display:block;
-  font-weight:600;
-  margin-bottom:6px;
-  color:#fff;
-  text-shadow:0 1px 2px rgba(0,0,0,.35);
+  display:block; font-weight:600; margin-bottom:6px;
+  color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
-
-/* Inputs: keep light backgrounds for readability, no wrapper box */
 input,textarea{
   width:100%;
   border:1px solid color-mix(in srgb, var(--ink) 18%, transparent);
   border-radius:12px;
   padding:12px 14px;
   font-size:1rem;
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.92); /* readable but airy over photo */
   box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
 input::placeholder, textarea::placeholder{ color:#666; }
 input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 
-/* Button on photo */
 .btn{
   appearance:none; border:0; background:var(--wine); color:var(--pink);
   padding:10px 14px; border-radius:999px; font-weight:700; cursor:pointer;
@@ -182,12 +168,9 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 }
 .btn:hover{ filter:brightness(1.05); }
 
-/* Email line over photo */
-.contact-alt a{
-  color:#fff;
-  font-weight:600;
-  text-shadow:0 1px 2px rgba(0,0,0,.35);
-}
+/* Make "Prefer email?" white too */
+.contact-alt{ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+.contact-alt a{ color:#fff; font-weight:600; text-decoration:underline; }
 
 /* Small-screen tune */
 @media (max-width: 640px){
