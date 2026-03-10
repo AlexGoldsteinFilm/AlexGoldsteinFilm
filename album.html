@@ -44,7 +44,6 @@
 <script src="js/main.js" defer></script>
 <script>
 (function () {
-  // Get album slug from URL: album.html?album=denver-baby-shoot
   var params = new URLSearchParams(window.location.search);
   var slug = params.get('album');
 
@@ -53,35 +52,29 @@
     return;
   }
 
-  // Fetch the full album JSON
   fetch('_data/albums/' + encodeURIComponent(slug) + '.json')
     .then(function (res) {
       if (!res.ok) throw new Error('Not found');
       return res.json();
     })
     .then(function (album) {
-      // Update page title
       document.title = album.title + ' — Alex Goldstein Film';
-
-      // Populate heading and description
       document.getElementById('album-title').textContent = album.title;
       document.getElementById('album-desc').textContent = album.description || '';
 
-      // Render photos
       var gallery = document.getElementById('album-gallery');
       gallery.innerHTML = '';
 
       if (album.photos && album.photos.length) {
         album.photos.forEach(function (photo) {
           var img = document.createElement('img');
-          img.src = photo.image;
-          img.alt = photo.alt || album.title;
+          img.src = typeof photo === 'string' ? photo : photo.image;
+          img.alt = album.title;
           img.loading = 'lazy';
           gallery.appendChild(img);
         });
       }
 
-      // Re-initialize lightbox for dynamically loaded images
       initDynamicLightbox(gallery);
     })
     .catch(function () {
@@ -89,7 +82,6 @@
       document.getElementById('album-desc').textContent = 'Sorry, we couldn\'t find that album.';
     });
 
-  // Lightbox for dynamically inserted images
   function initDynamicLightbox(gallery) {
     var backdrop, big, closeBtn;
 
