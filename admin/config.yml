@@ -17,10 +17,8 @@ collections:
     slug: "{{slug}}"
     extension: json
     format: json
-    sort: "date:desc"
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: Description, name: description, widget: text }
       - label: Photos
         name: photos
@@ -31,4 +29,4 @@ collections:
       - label: Cover Photo
         name: cover
         widget: image
-        hint: "Upload or pick the same image you want as the album cover on the portfolio page."
+        hint: "Click 'Choose an image' to select one of the photos you already uploaded above."
