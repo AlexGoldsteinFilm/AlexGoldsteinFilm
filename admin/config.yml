@@ -8,7 +8,6 @@ media_library:
     cloud_name: dfy80qmy3
     api_key: "381665872177331"
 
-# Where album data files are saved in your repo
 collections:
   - name: albums
     label: Portfolio Albums
@@ -25,9 +24,11 @@ collections:
       - { label: Description, name: description, widget: text }
       - label: Photos
         name: photos
-        widget: list
-        summary: "{{fields.alt}}"
-        fields:
-          - { label: Image, name: image, widget: image }
-          - { label: Alt Text, name: alt, widget: string }
-          - { label: Use as Cover, name: is_cover, widget: boolean, default: false }
+        widget: image
+        media_library:
+          config:
+            multiple: true
+      - label: Cover Photo
+        name: cover
+        widget: image
+        hint: "Upload or pick the same image you want as the album cover on the portfolio page."
