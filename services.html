@@ -31,8 +31,8 @@
 <main id="content" class="container">
   <section class="page-intro"><h1>Services</h1><p>Professional film photography — transparent and thoughtful.</p></section>
   <section class="service-grid">
-    <article class="service-card"><h2>Film Photo Shoot</h2><img src="images/services/film-shoot.jpeg" alt="Film Photo Shoot" loading="lazy" /><p class="price">Starting at $X</p><p>Capture timeless moments with a professional film photo shoot. Every shoot includes film costs, developing, and high-resolution scans.</p></article>
-    <article class="service-card"><h2>Darkroom Prints</h2><img src="images/services/darkroom-prints.jpeg" alt="Darkroom Prints" loading="lazy" /><p class="price">Starting at $X</p><p>Handcrafted darkroom prints made from film negatives, ensuring the highest quality archival prints.</p></article>
+    <article class="service-card"><h2>Film Photo Shoot</h2><img id="svc-film-shoot" src="images/services/film-shoot.jpeg" alt="Film Photo Shoot" loading="lazy" /><p class="price">Starting at $X</p><p>Capture timeless moments with a professional film photo shoot. Every shoot includes film costs, developing, and high-resolution scans.</p></article>
+    <article class="service-card"><h2>Darkroom Prints</h2><img id="svc-darkroom-prints" src="images/services/darkroom-prints.jpeg" alt="Darkroom Prints" loading="lazy" /><p class="price">Starting at $X</p><p>Handcrafted darkroom prints made from film negatives, ensuring the highest quality archival prints.</p></article>
   </section>
   <section class="service-info"><h2>Pricing Transparency</h2>
     <ul>
@@ -55,5 +55,13 @@
 </footer>
 <script src="js/main.js" defer></script>
 <script src="js/lightbox.js" defer></script>
-
+<script>
+  fetch('_data/services.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d.film_shoot) document.getElementById('svc-film-shoot').src = d.film_shoot;
+      if(d.darkroom_prints) document.getElementById('svc-darkroom-prints').src = d.darkroom_prints;
+    })
+    .catch(function(){});
+</script>
 </body></html>

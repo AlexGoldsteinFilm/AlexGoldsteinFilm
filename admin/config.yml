@@ -46,3 +46,9 @@ collections:
           - { label: Photo 1, name: photo1, widget: image, hint: "First about photo — Alex with her camera." }
           - { label: Photo 2, name: photo2, widget: image, hint: "Second about photo — Alex and husband in Colorado." }
           - { label: Photo 3, name: photo3, widget: image, hint: "Third about photo — Alex in the darkroom." }
+      - name: services
+        label: Services Page
+        file: _data/services.json
+        fields:
+          - { label: Film Photo Shoot Image, name: film_shoot, widget: image, hint: "Photo for the Film Photo Shoot service card." }
+          - { label: Darkroom Prints Image, name: darkroom_prints, widget: image, hint: "Photo for the Darkroom Prints service card." }
