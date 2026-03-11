@@ -30,3 +30,12 @@ collections:
         name: cover
         widget: image
         hint: "Click 'Choose an image' to select one of the photos you already uploaded above."
+
+  - name: settings
+    label: Site Settings
+    files:
+      - name: homepage
+        label: Homepage
+        file: _data/homepage.json
+        fields:
+          - { label: Hero Image, name: hero_image, widget: image, hint: "The main photo on the homepage." }
