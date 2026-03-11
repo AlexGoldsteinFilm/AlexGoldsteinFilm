@@ -1,4 +1,4 @@
 {
-  "film_shoot": "images/services/film-shoot.jpeg",
-  "darkroom_prints": "images/services/darkroom-prints.jpeg"
+  "film_shoot": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1773196928/film-shoot_sorikt.jpg",
+  "darkroom_prints": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1773196927/darkroom-prints_ixihq8.jpg"
 }
