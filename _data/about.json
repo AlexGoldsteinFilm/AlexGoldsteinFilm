@@ -1,5 +1,5 @@
 {
-  "photo1": "images/about1.jpeg",
-  "photo2": "images/about2.jpeg",
-  "photo3": "images/about3.jpeg"
+  "photo1": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1773196317/about1_cbm627.jpg",
+  "photo2": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1773196320/about2_hmrtsz.jpg",
+  "photo3": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1773196319/about3_vybvjr.jpg"
 }
