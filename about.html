@@ -31,16 +31,16 @@
 <main id="content" class="container">
   <section class="page-intro"><h1>About Alex</h1><p>Storyteller, attorney, and film photographer.</p></section>
   <section class="about-section">
-    <img src="images/about1.jpeg" class="about-photo" alt="Alex working with her camera" loading="lazy" />
-    <p>Alex has always been a storyteller—whether through the written word as an attorney or through the timeless beauty of film photography. A proud Texas girly, Alex was born and raised in the Lone Star State, where her love for capturing moments began with her grandfather’s Canon T50. That camera, rich with history and family memories, became her creative outlet in high school, where she first experienced the magic of film photography and developing prints in the darkroom.</p>
+    <img id="about-photo1" src="images/about1.jpeg" class="about-photo" alt="Alex working with her camera" loading="lazy" />
+    <p>Alex has always been a storyteller—whether through the written word as an attorney or through the timeless beauty of film photography. A proud Texas girly, Alex was born and raised in the Lone Star State, where her love for capturing moments began with her grandfather's Canon T50. That camera, rich with history and family memories, became her creative outlet in high school, where she first experienced the magic of film photography and developing prints in the darkroom.</p>
   </section>
   <section class="about-section">
-    <img src="images/about2.jpeg" class="about-photo" alt="Alex and her husband in Colorado" loading="lazy" />
+    <img id="about-photo2" src="images/about2.jpeg" class="about-photo" alt="Alex and her husband in Colorado" loading="lazy" />
     <p>Alex attended Trinity University in San Antonio before moving to Colorado to attend law school at the University of Denver. In the heart of the Rockies, she built a new home, fell in love with the breathtaking landscapes, and met her husband, a Colorado native.</p>
   </section>
   <section class="about-section">
-    <img src="images/about3.jpeg" class="about-photo" alt="Alex developing film in the darkroom" loading="lazy" />
-    <p>During a visit home to Texas, she found her Grandpa’s old Canon T50 and brought it back to Colorado—unknowingly reigniting a creative spark. What began as a personal rediscovery has grown into a deep love for the art of film photography. With a darkroom intensive at the Colorado Photographic Arts Center, Alex refined her skills in developing and printing film. Today, she’s building a portfolio that prioritizes joy, emotion, and unforgettable moments—captured on film.</p>
+    <img id="about-photo3" src="images/about3.jpeg" class="about-photo" alt="Alex developing film in the darkroom" loading="lazy" />
+    <p>During a visit home to Texas, she found her Grandpa's old Canon T50 and brought it back to Colorado—unknowingly reigniting a creative spark. What began as a personal rediscovery has grown into a deep love for the art of film photography. With a darkroom intensive at the Colorado Photographic Arts Center, Alex refined her skills in developing and printing film. Today, she's building a portfolio that prioritizes joy, emotion, and unforgettable moments—captured on film.</p>
   </section>
 </main>
 <footer class="site-footer" role="contentinfo">
@@ -48,5 +48,14 @@
 </footer>
 <script src="js/main.js" defer></script>
 <script src="js/lightbox.js" defer></script>
-
+<script>
+  fetch('_data/about.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d.photo1) document.getElementById('about-photo1').src = d.photo1;
+      if(d.photo2) document.getElementById('about-photo2').src = d.photo2;
+      if(d.photo3) document.getElementById('about-photo3').src = d.photo3;
+    })
+    .catch(function(){});
+</script>
 </body></html>

@@ -39,3 +39,10 @@ collections:
         file: _data/homepage.json
         fields:
           - { label: Hero Image, name: hero_image, widget: image, hint: "The main photo on the homepage." }
+      - name: about
+        label: About Page
+        file: _data/about.json
+        fields:
+          - { label: Photo 1, name: photo1, widget: image, hint: "First about photo — Alex with her camera." }
+          - { label: Photo 2, name: photo2, widget: image, hint: "Second about photo — Alex and husband in Colorado." }
+          - { label: Photo 3, name: photo3, widget: image, hint: "Third about photo — Alex in the darkroom." }
