@@ -52,3 +52,8 @@ collections:
         fields:
           - { label: Film Photo Shoot Image, name: film_shoot, widget: image, hint: "Photo for the Film Photo Shoot service card." }
           - { label: Darkroom Prints Image, name: darkroom_prints, widget: image, hint: "Photo for the Darkroom Prints service card." }
+      - name: contact
+        label: Contact Page
+        file: _data/contact.json
+        fields:
+          - { label: Background Photo, name: background_photo, widget: image, hint: "The background photo behind the contact form." }

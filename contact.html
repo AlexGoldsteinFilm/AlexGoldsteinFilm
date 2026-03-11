@@ -33,7 +33,7 @@
   <section class="contact-form-wrap">
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="contact" />
-      <p class="sr-only"><label>Don’t fill this out if you're human: <input name="bot-field" /></label></p>
+      <p class="sr-only"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
       <div class="form-field"><label for="name">Your Name</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
       <div class="form-field"><label for="email">Your Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
       <div class="form-field"><label for="message">Your Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
@@ -47,5 +47,15 @@
 </footer>
 <script src="js/main.js" defer></script>
 <script src="js/lightbox.js" defer></script>
-
+<script>
+  fetch('_data/contact.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(d.background_photo) {
+        document.body.style.backgroundImage =
+          'linear-gradient(rgba(238,174,172,.30), rgba(238,174,172,.30)), url(' + d.background_photo + ')';
+      }
+    })
+    .catch(function(){});
+</script>
 </body></html>
