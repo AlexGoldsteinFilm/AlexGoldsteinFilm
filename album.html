@@ -6,6 +6,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .lb-prev, .lb-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,.45);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+    .lb-prev:hover, .lb-next:hover { background: rgba(0,0,0,.7); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+    .lb-prev.open, .lb-next.open { display: flex; }
+  </style>
 </head><body>
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="header-titlebar">
@@ -65,58 +89,111 @@
       var gallery = document.getElementById('album-gallery');
       gallery.innerHTML = '';
 
+      var photoUrls = [];
+
       if (album.photos && album.photos.length) {
         album.photos.forEach(function (photo) {
+          var url = typeof photo === 'string' ? photo : photo.image;
+          photoUrls.push(url);
           var img = document.createElement('img');
-          img.src = typeof photo === 'string' ? photo : photo.image;
+          img.src = url;
           img.alt = album.title;
           img.loading = 'lazy';
           gallery.appendChild(img);
         });
       }
 
-      initDynamicLightbox(gallery);
+      initDynamicLightbox(gallery, photoUrls);
     })
     .catch(function () {
       document.getElementById('album-title').textContent = 'Album not found';
       document.getElementById('album-desc').textContent = 'Sorry, we couldn\'t find that album.';
     });
 
-  function initDynamicLightbox(gallery) {
-    var backdrop, big, closeBtn;
+  function initDynamicLightbox(gallery, photoUrls) {
+    var backdrop, big, closeBtn, prevBtn, nextBtn;
+    var currentIndex = 0;
 
     function ensureUI() {
       if (backdrop) return;
+
       backdrop = document.createElement('div');
       backdrop.className = 'lb-backdrop';
       big = document.createElement('img');
       backdrop.appendChild(big);
+
       closeBtn = document.createElement('button');
       closeBtn.className = 'lb-close';
       closeBtn.setAttribute('aria-label', 'Close');
       closeBtn.textContent = '\u00d7';
+
+      prevBtn = document.createElement('button');
+      prevBtn.className = 'lb-prev';
+      prevBtn.setAttribute('aria-label', 'Previous photo');
+      prevBtn.textContent = '\u2039';
+
+      nextBtn = document.createElement('button');
+      nextBtn.className = 'lb-next';
+      nextBtn.setAttribute('aria-label', 'Next photo');
+      nextBtn.textContent = '\u203a';
+
       document.body.appendChild(backdrop);
       document.body.appendChild(closeBtn);
+      document.body.appendChild(prevBtn);
+      document.body.appendChild(nextBtn);
 
       function close() {
         backdrop.classList.remove('open');
         closeBtn.classList.remove('open');
+        prevBtn.classList.remove('open');
+        nextBtn.classList.remove('open');
         document.body.style.overflow = '';
       }
-      backdrop.addEventListener('click', close);
-      closeBtn.addEventListener('click', close);
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') close();
+
+      backdrop.addEventListener('click', function (e) {
+        if (e.target === backdrop) close();
       });
+      closeBtn.addEventListener('click', close);
+
+      prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPhoto(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPhoto(currentIndex + 1);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!backdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') showPhoto(currentIndex - 1);
+        if (e.key === 'ArrowRight') showPhoto(currentIndex + 1);
+      });
+    }
+
+    function showPhoto(index) {
+      if (index < 0) index = photoUrls.length - 1;
+      if (index >= photoUrls.length) index = 0;
+      currentIndex = index;
+      big.src = photoUrls[currentIndex];
     }
 
     gallery.addEventListener('click', function (e) {
       var target = e.target.closest('img');
       if (!target) return;
       ensureUI();
-      big.src = target.src;
+
+      var clickedUrl = target.src;
+      currentIndex = photoUrls.indexOf(clickedUrl);
+      if (currentIndex === -1) currentIndex = 0;
+
+      big.src = photoUrls[currentIndex];
       backdrop.classList.add('open');
       closeBtn.classList.add('open');
+      prevBtn.classList.add('open');
+      nextBtn.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
   }
