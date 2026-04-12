@@ -57,3 +57,14 @@ collections:
         file: _data/contact.json
         fields:
           - { label: Background Photo, name: background_photo, widget: image, hint: "The background photo behind the contact form." }
+      - name: gallery
+        label: Gallery
+        file: _data/gallery.json
+        fields:
+          - label: Photos
+            name: photos
+            widget: image
+            hint: "Upload photos for the gallery page. You can select multiple photos at once."
+            media_library:
+              config:
+                multiple: true

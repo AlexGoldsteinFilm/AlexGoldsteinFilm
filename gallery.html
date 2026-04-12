@@ -30,10 +30,162 @@
 </nav>
 
 <main id="content" class="container">
-  <section class="page-intro"><h1>Gallery</h1><p>A collection of everyday moments — nature, animals, outings, and more. Coming soon.</p></section>
+  <section class="page-intro"><h1>Gallery</h1><p>Moments from everyday life — nature, outings, and the beauty of film.</p></section>
+  <section class="gallery-masonry" id="gallery-grid" aria-label="Photo gallery">
+    <p class="loading-msg">Loading photos…</p>
+  </section>
 </main>
+
 <footer class="site-footer" role="contentinfo">
   <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
 </footer>
 <script src="js/main.js" defer></script>
+<style>
+  .lb-prev, .lb-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,.45);
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+  }
+  .lb-prev:hover, .lb-next:hover { background: rgba(0,0,0,.7); }
+  .lb-prev { left: 16px; }
+  .lb-next { right: 16px; }
+  .lb-prev.open, .lb-next.open { display: flex; }
+</style>
+<script>
+(function () {
+  fetch('_data/gallery.json')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+
+      var photos = data.photos || [];
+
+      if (!photos.length) {
+        grid.innerHTML = '<p>No photos yet — check back soon!</p>';
+        return;
+      }
+
+      var photoUrls = [];
+
+      photos.forEach(function (photo) {
+        var url = typeof photo === 'string' ? photo : photo.image;
+        photoUrls.push(url);
+        var img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Photo by Alex Goldstein';
+        img.loading = 'lazy';
+        grid.appendChild(img);
+      });
+
+      initLightbox(grid, photoUrls);
+    })
+    .catch(function () {
+      var grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '<p>Could not load photos. Please try again later.</p>';
+    });
+
+  function initLightbox(gallery, photoUrls) {
+    var backdrop, big, closeBtn, prevBtn, nextBtn;
+    var currentIndex = 0;
+
+    function ensureUI() {
+      if (backdrop) return;
+
+      backdrop = document.createElement('div');
+      backdrop.className = 'lb-backdrop';
+      big = document.createElement('img');
+      backdrop.appendChild(big);
+
+      closeBtn = document.createElement('button');
+      closeBtn.className = 'lb-close';
+      closeBtn.setAttribute('aria-label', 'Close');
+      closeBtn.textContent = '\u00d7';
+
+      prevBtn = document.createElement('button');
+      prevBtn.className = 'lb-prev';
+      prevBtn.setAttribute('aria-label', 'Previous photo');
+      prevBtn.textContent = '\u2039';
+
+      nextBtn = document.createElement('button');
+      nextBtn.className = 'lb-next';
+      nextBtn.setAttribute('aria-label', 'Next photo');
+      nextBtn.textContent = '\u203a';
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(closeBtn);
+      document.body.appendChild(prevBtn);
+      document.body.appendChild(nextBtn);
+
+      function close() {
+        backdrop.classList.remove('open');
+        closeBtn.classList.remove('open');
+        prevBtn.classList.remove('open');
+        nextBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      backdrop.addEventListener('click', function (e) {
+        if (e.target === backdrop) close();
+      });
+      closeBtn.addEventListener('click', close);
+
+      prevBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPhoto(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showPhoto(currentIndex + 1);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!backdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') showPhoto(currentIndex - 1);
+        if (e.key === 'ArrowRight') showPhoto(currentIndex + 1);
+      });
+    }
+
+    function showPhoto(index) {
+      if (index < 0) index = photoUrls.length - 1;
+      if (index >= photoUrls.length) index = 0;
+      currentIndex = index;
+      big.src = photoUrls[currentIndex];
+    }
+
+    gallery.addEventListener('click', function (e) {
+      var target = e.target.closest('img');
+      if (!target) return;
+      ensureUI();
+
+      var clickedUrl = target.src;
+      currentIndex = photoUrls.indexOf(clickedUrl);
+      if (currentIndex === -1) currentIndex = 0;
+
+      big.src = photoUrls[currentIndex];
+      backdrop.classList.add('open');
+      closeBtn.classList.add('open');
+      prevBtn.classList.add('open');
+      nextBtn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+})();
+</script>
+
 </body></html>
