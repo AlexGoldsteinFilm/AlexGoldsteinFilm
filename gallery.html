@@ -71,13 +71,19 @@
   var ROW_HEIGHT = 8;
   var GAP = 10;
   var COLS = 5;
-  var WIDE_CHANCE = 0.3; // 30% of photos will be double-wide
+  var DEFAULT_ROW_SPAN = 20;
+  var WIDE_CHANCE = 0.3;
 
-  // Simple seeded random so layout is consistent per session
   var seed = Math.random();
   function seededRandom(i) {
     var x = Math.sin(seed + i * 9301 + 49297) * 233280;
     return x - Math.floor(x);
+  }
+
+  // Convert a full Cloudinary URL to a smaller thumbnail
+  // Inserts w_400,q_auto,f_auto before the version/filename
+  function toThumb(url) {
+    return url.replace('/upload/', '/upload/w_400,q_auto,f_auto/');
   }
 
   fetch('_data/gallery.json')
@@ -93,18 +99,19 @@
         return;
       }
 
-      var photoUrls = [];
+      var fullUrls = [];
       var lastWasWide = false;
 
       photos.forEach(function (photo, index) {
-        var url = typeof photo === 'string' ? photo : photo.image;
-        photoUrls.push(url);
+        var fullUrl = typeof photo === 'string' ? photo : photo.image;
+        fullUrls.push(fullUrl);
 
         var wrapper = document.createElement('div');
         wrapper.className = 'gallery-item';
 
-        // Randomly assign some photos to be double-wide
-        // Never two wide photos in a row
+        // Set a default row span so photos aren't squished before loading
+        wrapper.style.gridRowEnd = 'span ' + DEFAULT_ROW_SPAN;
+
         var isWide = !lastWasWide && seededRandom(index) < WIDE_CHANCE;
         if (isWide) {
           wrapper.classList.add('wide');
@@ -114,13 +121,13 @@
         }
 
         var img = document.createElement('img');
-        img.src = url;
+        // Load the small thumbnail, not the full image
+        img.src = toThumb(fullUrl);
         img.alt = 'Photo by Alex Goldstein';
         img.loading = 'lazy';
 
         img.addEventListener('load', function () {
           var aspectRatio = img.naturalHeight / img.naturalWidth;
-          // For wide items, the effective width is 2 columns + 1 gap
           var singleColWidth = (grid.offsetWidth - GAP * (COLS - 1)) / COLS;
           var itemWidth = isWide ? (singleColWidth * 2 + GAP) : singleColWidth;
           var photoHeight = itemWidth * aspectRatio;
@@ -132,7 +139,8 @@
         grid.appendChild(wrapper);
       });
 
-      initLightbox(grid, photoUrls);
+      // Pass full URLs to lightbox so clicking shows full resolution
+      initLightbox(grid, fullUrls);
     })
     .catch(function () {
       var grid = document.getElementById('gallery-grid');
@@ -214,8 +222,10 @@
       if (!target) return;
       ensureUI();
 
-      var clickedUrl = target.src;
-      currentIndex = photoUrls.indexOf(clickedUrl);
+      // Match the clicked thumbnail back to the full URL by index
+      var items = gallery.querySelectorAll('.gallery-item');
+      var clickedItem = target.closest('.gallery-item');
+      currentIndex = Array.prototype.indexOf.call(items, clickedItem);
       if (currentIndex === -1) currentIndex = 0;
 
       big.src = photoUrls[currentIndex];
