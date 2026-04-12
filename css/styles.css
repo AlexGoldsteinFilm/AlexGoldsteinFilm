@@ -257,7 +257,8 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
 }
 .gallery-item img{
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   border-radius: 0;
   box-shadow: none;
