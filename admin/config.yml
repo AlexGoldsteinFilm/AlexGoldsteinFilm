@@ -10,7 +10,7 @@ media_library:
 
 collections:
   - name: albums
-    label: Portfolio Albums
+    label: Session Albums
     label_singular: Album
     folder: _data/albums
     create: true
