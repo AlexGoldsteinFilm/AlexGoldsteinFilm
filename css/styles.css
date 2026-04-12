@@ -266,9 +266,23 @@ input:focus,textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
   .gallery-masonry{ grid-template-columns: repeat(4, 1fr); }
 }
 @media (max-width: 720px){
-  .gallery-masonry{ grid-template-columns: repeat(3, 1fr); }
+  .gallery-masonry{
+    display: block;
+    columns: 2;
+    column-gap: 10px;
+  }
+  .gallery-item{
+    break-inside: avoid;
+    margin-bottom: 10px;
+  }
+  .gallery-item.wide{
+    grid-column: auto;
+  }
+  .gallery-item img{
+    height: auto;
+    object-fit: contain;
+  }
 }
-@media (max-width: 480px){
-  .gallery-masonry{ grid-template-columns: repeat(2, 1fr); }
-  .gallery-item.wide{ grid-column: span 2; }
+@media (max-width: 400px){
+  .gallery-masonry{ columns: 1; }
 }
