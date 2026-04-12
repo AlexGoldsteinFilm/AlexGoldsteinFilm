@@ -29,9 +29,11 @@
   </ul>
 </nav>
 
-<main id="content" class="container">
-  <section class="page-intro"><h1>Gallery</h1><p>Moments from everyday life — nature, outings, and the beauty of film.</p></section>
-  <section class="gallery-masonry" id="gallery-grid" aria-label="Photo gallery">
+<main id="content">
+  <div class="container">
+    <section class="page-intro"><h1>Gallery</h1><p>Moments from everyday life — nature, outings, and the beauty of film.</p></section>
+  </div>
+  <section class="gallery-masonry gallery-wide" id="gallery-grid" aria-label="Photo gallery">
     <p class="loading-msg">Loading photos…</p>
   </section>
 </main>
@@ -66,6 +68,9 @@
 </style>
 <script>
 (function () {
+  var ROW_HEIGHT = 8;
+  var GAP = 12;
+
   fetch('_data/gallery.json')
     .then(function (res) { return res.json(); })
     .then(function (data) {
@@ -84,11 +89,25 @@
       photos.forEach(function (photo) {
         var url = typeof photo === 'string' ? photo : photo.image;
         photoUrls.push(url);
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'gallery-item';
+
         var img = document.createElement('img');
         img.src = url;
         img.alt = 'Photo by Alex Goldstein';
         img.loading = 'lazy';
-        grid.appendChild(img);
+
+        img.addEventListener('load', function () {
+          var aspectRatio = img.naturalHeight / img.naturalWidth;
+          var colWidth = grid.querySelector('.gallery-item').offsetWidth;
+          var photoHeight = colWidth * aspectRatio;
+          var rowSpan = Math.ceil((photoHeight + GAP) / (ROW_HEIGHT + GAP));
+          wrapper.style.gridRowEnd = 'span ' + rowSpan;
+        });
+
+        wrapper.appendChild(img);
+        grid.appendChild(wrapper);
       });
 
       initLightbox(grid, photoUrls);
