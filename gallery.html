@@ -69,7 +69,16 @@
 <script>
 (function () {
   var ROW_HEIGHT = 8;
-  var GAP = 12;
+  var GAP = 10;
+  var COLS = 5;
+  var WIDE_CHANCE = 0.3; // 30% of photos will be double-wide
+
+  // Simple seeded random so layout is consistent per session
+  var seed = Math.random();
+  function seededRandom(i) {
+    var x = Math.sin(seed + i * 9301 + 49297) * 233280;
+    return x - Math.floor(x);
+  }
 
   fetch('_data/gallery.json')
     .then(function (res) { return res.json(); })
@@ -85,13 +94,24 @@
       }
 
       var photoUrls = [];
+      var lastWasWide = false;
 
-      photos.forEach(function (photo) {
+      photos.forEach(function (photo, index) {
         var url = typeof photo === 'string' ? photo : photo.image;
         photoUrls.push(url);
 
         var wrapper = document.createElement('div');
         wrapper.className = 'gallery-item';
+
+        // Randomly assign some photos to be double-wide
+        // Never two wide photos in a row
+        var isWide = !lastWasWide && seededRandom(index) < WIDE_CHANCE;
+        if (isWide) {
+          wrapper.classList.add('wide');
+          lastWasWide = true;
+        } else {
+          lastWasWide = false;
+        }
 
         var img = document.createElement('img');
         img.src = url;
@@ -100,8 +120,10 @@
 
         img.addEventListener('load', function () {
           var aspectRatio = img.naturalHeight / img.naturalWidth;
-          var colWidth = grid.querySelector('.gallery-item').offsetWidth;
-          var photoHeight = colWidth * aspectRatio;
+          // For wide items, the effective width is 2 columns + 1 gap
+          var singleColWidth = (grid.offsetWidth - GAP * (COLS - 1)) / COLS;
+          var itemWidth = isWide ? (singleColWidth * 2 + GAP) : singleColWidth;
+          var photoHeight = itemWidth * aspectRatio;
           var rowSpan = Math.ceil((photoHeight + GAP) / (ROW_HEIGHT + GAP));
           wrapper.style.gridRowEnd = 'span ' + rowSpan;
         });
