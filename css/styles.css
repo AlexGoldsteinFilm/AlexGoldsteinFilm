@@ -36,10 +36,8 @@ h1,h2,h3,.brand__title{font-family:"Playfair Display",Georgia,serif;color:var(--
 .nav-link:hover,.nav-link:focus{background:color-mix(in srgb,var(--pink) 18%, transparent);outline:2px solid color-mix(in srgb,var(--pink) 35%, transparent);outline-offset:2px}
 .menu-toggle{display:none;background:transparent;border:0;color:var(--pink);font-size:20px;padding:8px 10px;border-radius:10px;position:absolute;left:8px;top:8px}
 @media (max-width:780px){
-  .site-subnav{ min-height: 44px; }
-  .menu-toggle{display:inline-flex;align-items:center;justify-content:center;top:50%;transform:translateY(-50%)}
-  .site-subnav .nav-list{display:none;flex-direction:column;align-items:flex-start;background:var(--green);border-radius:12px;margin-top:44px;position:absolute;left:8px;right:8px;padding:12px;box-shadow:var(--shadow-md)}
-  .site-subnav[aria-expanded=true] .nav-list{display:flex}
+  .site-subnav .nav-list{flex-wrap:wrap;gap:clamp(6px,1.5vw,12px)}
+  .nav-link{padding:6px 8px;font-size:clamp(13px,2.8vw,16px)}
 }
 
 /* Footer */
