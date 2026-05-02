@@ -1,0 +1,8 @@
+{
+  "title": "Test Album 2",
+  "description": "Test",
+  "photos": [
+    "https://res.cloudinary.com/dfy80qmy3/image/upload/v1777752471/IMG_6126_elh537.jpg"
+  ],
+  "cover": "https://res.cloudinary.com/dfy80qmy3/image/upload/v1777752471/IMG_6126_elh537.jpg"
+}
