@@ -47,7 +47,7 @@ h1,h2,h3,.brand__title{font-family:"Playfair Display",Georgia,serif;color:var(--
 .nav-chevron{font-size:.75em;transition:transform .2s;display:inline-block}
 .nav-has-dropdown.open .nav-chevron{transform:rotate(180deg)}
 .nav-dropdown{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--wine);border-radius:10px;padding:6px;list-style:none;margin:0;min-width:230px;box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:opacity .15s;z-index:200}
-.nav-has-dropdown.open .nav-dropdown{opacity:1;pointer-events:auto}
+.nav-has-dropdown.open .nav-dropdown,.nav-has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto}
 .nav-dropdown li{margin:0}
 .nav-dropdown .nav-link{display:block;padding:9px 14px;border-radius:8px;white-space:nowrap;font-size:.92em}
 @media (max-width:780px){
