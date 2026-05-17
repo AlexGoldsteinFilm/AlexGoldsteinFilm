@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head>
-  <title>Gallery — Alex Goldstein Film</title>
+  <title>Cyanotypes — Alex Goldstein Film</title>
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,21 +30,60 @@
 </nav>
 
 <main id="content" class="container">
-  <section class="page-intro"><h1>Gallery</h1><p>Browse Alex's personal work and fine art photography.</p></section>
-  <div class="gallery-sections">
-    <a href="gallery-personal.html" class="gallery-section-card">
-      <h2>Personal &amp; Fine Art</h2>
-      <p>Everyday moments, nature, and personal projects captured on film.</p>
-    </a>
-    <a href="gallery-cyanotypes.html" class="gallery-section-card">
-      <h2>Cyanotypes</h2>
-      <p>Alternative photographic printing — handcrafted cyanotype prints.</p>
-    </a>
-  </div>
+  <section class="page-intro"><h1>Cyanotypes</h1><p>Alternative photographic printing — handcrafted cyanotype prints.</p></section>
+  <section class="portfolio-grid" id="portfolio-grid" aria-label="Cyanotype albums">
+    <p class="loading-msg">Loading albums…</p>
+  </section>
 </main>
 
 <footer class="site-footer" role="contentinfo">
   <p>&copy; 2025 Alex Goldstein Film. All rights reserved.</p>
 </footer>
 <script src="js/main.js" defer></script>
+<script>
+(function () {
+  fetch('_data/gallery-cyanotypes-index.json')
+    .then(function (res) { return res.json(); })
+    .then(function (albums) {
+      var grid = document.getElementById('portfolio-grid');
+      grid.innerHTML = '';
+
+      if (!albums.length) {
+        grid.innerHTML = '<p>No albums yet — check back soon!</p>';
+        return;
+      }
+
+      albums.forEach(function (album) {
+        var card = document.createElement('article');
+        card.className = 'album-card';
+
+        var link = document.createElement('a');
+        link.href = 'gallery-album.html?album=' + encodeURIComponent(album.slug) + '&section=cyanotypes';
+        link.className = 'album-link';
+
+        var thumbDiv = document.createElement('div');
+        thumbDiv.className = 'album-thumb';
+        var img = document.createElement('img');
+        img.src = album.cover || '';
+        img.alt = album.title;
+        img.loading = 'lazy';
+        thumbDiv.appendChild(img);
+
+        var title = document.createElement('h2');
+        title.className = 'album-title';
+        title.textContent = album.title;
+
+        link.appendChild(thumbDiv);
+        link.appendChild(title);
+        card.appendChild(link);
+        grid.appendChild(card);
+      });
+    })
+    .catch(function () {
+      var grid = document.getElementById('portfolio-grid');
+      grid.innerHTML = '<p>Could not load albums. Please try again later.</p>';
+    });
+})();
+</script>
+
 </body></html>

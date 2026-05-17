@@ -54,11 +54,11 @@
 
 <main id="content" class="container album-page">
   <section class="page-intro" id="album-intro">
-    <a href="sessions.html" class="back-link"><span class="arrow">←</span><span>Back to Sessions</span></a>
+    <a href="#" id="back-link" class="back-link"><span class="arrow">←</span><span id="back-text">Back</span></a>
     <h1 id="album-title">Loading…</h1>
     <p id="album-desc"></p>
   </section>
-  <section class="album-gallery" id="album-gallery">
+  <section class="gallery-masonry gallery-wide" id="gallery-grid" aria-label="Album photos">
     <!-- Photos loaded dynamically -->
   </section>
 </main>
@@ -71,13 +71,27 @@
 (function () {
   var params = new URLSearchParams(window.location.search);
   var slug = params.get('album');
+  var section = params.get('section') || 'personal';
+
+  var backLink = document.getElementById('back-link');
+  var backText = document.getElementById('back-text');
+
+  if (section === 'cyanotypes') {
+    backLink.href = 'gallery-cyanotypes.html';
+    backText.textContent = 'Back to Cyanotypes';
+  } else {
+    backLink.href = 'gallery-personal.html';
+    backText.textContent = 'Back to Personal & Fine Art';
+  }
 
   if (!slug) {
     document.getElementById('album-title').textContent = 'Album not found';
     return;
   }
 
-  fetch('_data/albums/' + encodeURIComponent(slug) + '.json')
+  var dataPath = '_data/gallery-' + section + '/' + encodeURIComponent(slug) + '.json';
+
+  fetch(dataPath)
     .then(function (res) {
       if (!res.ok) throw new Error('Not found');
       return res.json();
@@ -87,31 +101,77 @@
       document.getElementById('album-title').textContent = album.title;
       document.getElementById('album-desc').textContent = album.description || '';
 
-      var gallery = document.getElementById('album-gallery');
-      gallery.innerHTML = '';
+      var grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
 
-      var photoUrls = [];
+      var photos = album.photos || [];
 
-      if (album.photos && album.photos.length) {
-        album.photos.forEach(function (photo) {
-          var url = typeof photo === 'string' ? photo : photo.image;
-          photoUrls.push(url);
-          var img = document.createElement('img');
-          img.src = url;
-          img.alt = album.title;
-          img.loading = 'lazy';
-          gallery.appendChild(img);
-        });
+      if (!photos.length) {
+        grid.innerHTML = '<p>No photos in this album yet.</p>';
+        return;
       }
 
-      initDynamicLightbox(gallery, photoUrls);
+      var ROW_HEIGHT = 8;
+      var GAP = 10;
+      var COLS = 5;
+      var DEFAULT_ROW_SPAN = 20;
+      var WIDE_CHANCE = 0.3;
+
+      var seed = Math.random();
+      function seededRandom(i) {
+        var x = Math.sin(seed + i * 9301 + 49297) * 233280;
+        return x - Math.floor(x);
+      }
+
+      function toThumb(url) {
+        return url.replace('/upload/', '/upload/w_400,q_auto,f_auto/');
+      }
+
+      var fullUrls = [];
+      var lastWasWide = false;
+
+      photos.forEach(function (photo, index) {
+        var fullUrl = typeof photo === 'string' ? photo : photo.image;
+        fullUrls.push(fullUrl);
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'gallery-item';
+        wrapper.style.gridRowEnd = 'span ' + DEFAULT_ROW_SPAN;
+
+        var isWide = !lastWasWide && seededRandom(index) < WIDE_CHANCE;
+        if (isWide) {
+          wrapper.classList.add('wide');
+          lastWasWide = true;
+        } else {
+          lastWasWide = false;
+        }
+
+        var img = document.createElement('img');
+        img.src = toThumb(fullUrl);
+        img.alt = 'Photo by Alex Goldstein';
+        img.loading = 'lazy';
+
+        img.addEventListener('load', function () {
+          var aspectRatio = img.naturalHeight / img.naturalWidth;
+          var singleColWidth = (grid.offsetWidth - GAP * (COLS - 1)) / COLS;
+          var itemWidth = isWide ? (singleColWidth * 2 + GAP) : singleColWidth;
+          var photoHeight = itemWidth * aspectRatio;
+          var rowSpan = Math.ceil((photoHeight + GAP) / (ROW_HEIGHT + GAP));
+          wrapper.style.gridRowEnd = 'span ' + rowSpan;
+        });
+
+        wrapper.appendChild(img);
+        grid.appendChild(wrapper);
+      });
+
+      initLightbox(grid, fullUrls);
     })
     .catch(function () {
       document.getElementById('album-title').textContent = 'Album not found';
       document.getElementById('album-desc').textContent = 'Sorry, we couldn\'t find that album.';
     });
 
-  function initDynamicLightbox(gallery, photoUrls) {
+  function initLightbox(gallery, photoUrls) {
     var backdrop, big, closeBtn, prevBtn, nextBtn;
     var currentIndex = 0;
 
@@ -126,17 +186,17 @@
       closeBtn = document.createElement('button');
       closeBtn.className = 'lb-close';
       closeBtn.setAttribute('aria-label', 'Close');
-      closeBtn.textContent = '\u00d7';
+      closeBtn.textContent = '×';
 
       prevBtn = document.createElement('button');
       prevBtn.className = 'lb-prev';
       prevBtn.setAttribute('aria-label', 'Previous photo');
-      prevBtn.textContent = '\u2039';
+      prevBtn.textContent = '‹';
 
       nextBtn = document.createElement('button');
       nextBtn.className = 'lb-next';
       nextBtn.setAttribute('aria-label', 'Next photo');
-      nextBtn.textContent = '\u203a';
+      nextBtn.textContent = '›';
 
       document.body.appendChild(backdrop);
       document.body.appendChild(closeBtn);
@@ -186,8 +246,9 @@
       if (!target) return;
       ensureUI();
 
-      var clickedUrl = target.src;
-      currentIndex = photoUrls.indexOf(clickedUrl);
+      var items = gallery.querySelectorAll('.gallery-item');
+      var clickedItem = target.closest('.gallery-item');
+      currentIndex = Array.prototype.indexOf.call(items, clickedItem);
       if (currentIndex === -1) currentIndex = 0;
 
       big.src = photoUrls[currentIndex];

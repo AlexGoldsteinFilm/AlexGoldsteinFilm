@@ -31,6 +31,50 @@ collections:
         widget: image
         hint: "Click 'Choose an image' to select one of the photos you already uploaded above."
 
+  - name: gallery_personal
+    label: "Gallery — Personal & Fine Art"
+    label_singular: Album
+    folder: _data/gallery-personal
+    create: true
+    slug: "{{slug}}"
+    extension: json
+    format: json
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - label: Photos
+        name: photos
+        widget: image
+        media_library:
+          config:
+            multiple: true
+      - label: Cover Photo
+        name: cover
+        widget: image
+        hint: "Click 'Choose an image' to select one of the photos you already uploaded above."
+
+  - name: gallery_cyanotypes
+    label: "Gallery — Cyanotypes"
+    label_singular: Album
+    folder: _data/gallery-cyanotypes
+    create: true
+    slug: "{{slug}}"
+    extension: json
+    format: json
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - label: Photos
+        name: photos
+        widget: image
+        media_library:
+          config:
+            multiple: true
+      - label: Cover Photo
+        name: cover
+        widget: image
+        hint: "Click 'Choose an image' to select one of the photos you already uploaded above."
+
   - name: settings
     label: Site Settings
     files:
